@@ -161,7 +161,7 @@ query.limit(1000);
 
 Parse.Cloud.job("Migrate_Documents", function(request, status) {
  
-var docsQuery = Parse.Object.extend("Documents");
+var docsQuery = Parse.Object.extend("Document");
 var query = new Parse.Query(docsQuery);
  
 query.limit(1000);
@@ -180,7 +180,7 @@ query.limit(1000);
                       var file = result.get("file");
                     
                       
-                       var Docs2016 = Parse.Object.extend("Documents_2016");
+                       var Docs2016 = Parse.Object.extend("Document_2016");
      
                        var Docs = new Docs2016();
                        
