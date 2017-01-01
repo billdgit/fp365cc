@@ -88,8 +88,8 @@ query.limit(1000);
 
 Parse.Cloud.job("Migrate_Hours", function(request, status) {
  
-var oldQuery = Parse.Object.extend("Hours");
-var query = new Parse.Query(oldQuery);
+var hoursQuery = Parse.Object.extend("Hours");
+var query = new Parse.Query(hoursQuery);
  
 query.limit(1000);
 
