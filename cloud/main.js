@@ -6,4 +6,5 @@ require('./functions')
 * We mount it automaticaly to the Parse Server Deployment.
 * If you don't want to use it just comment module.exports.app
 */
-module.exports.app = require('./app')
+//module.exports.app = require('./app')
+require('./app.js')
