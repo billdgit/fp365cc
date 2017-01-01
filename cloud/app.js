@@ -272,7 +272,7 @@ query.limit(1000);
   error: function(result, error) {
     // Execute any logic that should take place if the save fails.
     // error is a Parse.Error with an error code and description.
-    console.info('Failed to update sale, with error code: ' + error.message);
+    console.info('Failed to update Activity, with error code: ' + error.message);
     
     //res.send("fail");
   }
