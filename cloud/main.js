@@ -1,4 +1,4 @@
-require('./functions')
+//require('./functions')
 
 /*
 * If you want to use Advanced Cloud Code,
