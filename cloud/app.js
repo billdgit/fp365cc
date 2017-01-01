@@ -229,7 +229,7 @@ var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
  
 query.limit(1000);
-query.skip(3000);
+query.skip(4000);
     query.find({
             success:function(results) {
             
