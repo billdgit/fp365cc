@@ -85,3 +85,77 @@ query.limit(1000);
     })
  
 });
+
+Parse.Cloud.job("Migrate_Hours", function(request, status) {
+ 
+var oldQuery = Parse.Object.extend("Hours");
+var query = new Parse.Query(oldQuery);
+ 
+query.limit(1000);
+
+    query.find({
+            success:function(results) {
+            
+            console.info("total old hours needing to ARCHIVE = "+results.length);
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+                      
+                      var logdatedate = result.get("logDateDate");
+                      var jobnotes = result.get("jobNotes");
+                      var jobname = result.get("jobName");
+                      var jobtotal = result.get("jobTotal");
+                      
+                      var jobhours = result.get("jobHours");
+                      var joblocation = result.get("jobLocation");
+                      var jobrate = result.get("jobRate");
+                      var userobjectid = result.get("userObjectId");
+                      
+                      
+                       var Hours2016 = Parse.Object.extend("Hours_2016");
+     
+                       var Hours = new Hours2016();
+                       
+                       Hours.set("logDateDate",logdatedate);
+                       Hours.set("jobNotes",jobnotes);
+                       Hours.set("jobName",jobname);
+                       Hours.set("jobHours",jobhours);
+                       Hours.set("jobTotal",jobtotal);
+                       Hours.set("jobRate",jobrate);
+                       Hours.set("jobLocation",joblocation);
+                     
+                       Hours.set("userObjectId",userobjectid);
+                       
+                     
+              
+                     
+                      Hours.save(null, {
+  success: function(Hours) {
+    // Execute any logic that should take place after the object is saved.
+    //console.info('Sale archived with label ='+salelabel);
+    //status.success("SZSales completed")
+    //res.send("success");
+     //status.success("Score Migration successfull");
+              
+  },
+  error: function(result, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and description.
+    console.info('Failed to update sale, with error code: ' + error.message);
+    
+    //res.send("fail");
+  }
+});
+                 
+                  
+                }   
+                  
+                      status.success("Hours Migration successfull");  
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");         
+            }
+    })
+ 
+});
+
