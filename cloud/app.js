@@ -159,3 +159,67 @@ query.limit(1000);
  
 });
 
+Parse.Cloud.job("Migrate_Documents", function(request, status) {
+ 
+var docsQuery = Parse.Object.extend("Documents");
+var query = new Parse.Query(docsQuery);
+ 
+query.limit(1000);
+
+    query.find({
+            success:function(results) {
+            
+            console.info("total old hours needing to ARCHIVE = "+results.length);
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+                      
+                       var userobjectid = result.get("userObjectId");
+                      var folder = result.get("folder");
+                      var filename = result.get("fileName");
+                      
+                      var file = result.get("file");
+                    
+                      
+                       var Docs2016 = Parse.Object.extend("Documents_2016");
+     
+                       var Docs = new Docs2016();
+                       
+                       Docs.set("userObjectId",userobjectid);
+                       Docs.set("folder",folder);
+                       Docs.set("fileName",filename);
+                       Docs.set("file",file);
+                       
+                     
+              
+                     
+                      Docs.save(null, {
+  success: function(Docs) {
+    // Execute any logic that should take place after the object is saved.
+    //console.info('Sale archived with label ='+salelabel);
+    //status.success("SZSales completed")
+    //res.send("success");
+     //status.success("Score Migration successfull");
+              
+  },
+  error: function(result, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and description.
+    console.info('Failed to update sale, with error code: ' + error.message);
+    
+    //res.send("fail");
+  }
+});
+                 
+                  
+                }   
+                  
+                      status.success("Documents Migration successfull");  
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");         
+            }
+    })
+ 
+});
+
