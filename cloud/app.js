@@ -1,4 +1,4 @@
-    Parse.Cloud.job("deleteOldDevSample", function(request, status) {
+Parse.Cloud.job("Migrate_Score", function(request, status) {
  
 var oldQuery = Parse.Object.extend("Score");
 var query = new Parse.Query(oldQuery);
