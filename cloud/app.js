@@ -319,27 +319,22 @@ query.limit(500);
                        var result = results[i];
 
                        var userobjectid = result.get("userObjectId");
-                      var logdatedate = result.get("logDateDate");
-
-
+                       var logdatedate = result.get("logDateDate");
                         var userlocation = result.get("userLocation");
 
 
-
                        var ActOrig = Parse.Object.extend("AuthFail_2017");
-
                        var Act = new ActOrig();
 
                        Act.set("userObjectId",userobjectid);
                        Act.set("logDateDate",logdatedate);
-
                        Act.set("userLocation",userLocation);
 
 
                       Act.save(null, {
   success: function(Act) {
     // Execute any logic that should take place after the object is saved.
-    //console.info('Activity archived with label');
+    console.info('Activity archived with label');
     //status.success("SZSales completed")
     //res.send("success");
      //status.success("Score Migration successfull");
