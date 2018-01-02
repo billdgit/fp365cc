@@ -164,12 +164,12 @@ Parse.Cloud.job("Migrate_Documents", function(request, status) {
 var docsQuery = Parse.Object.extend("Document");
 var query = new Parse.Query(docsQuery);
 
-query.limit(1000);
+query.limit(10000);
 
     query.find({
             success:function(results) {
 
-            console.info("total old hours needing to ARCHIVE = "+results.length);
+            console.info("total old documents needing to ARCHIVE = "+results.length);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
@@ -228,7 +228,7 @@ Parse.Cloud.job("Migrate_Activity", function(request, status) {
 var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
-query.limit(100);
+query.limit(1000);
 //query.skip();
     query.find({
             success:function(results) {
