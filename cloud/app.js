@@ -314,20 +314,16 @@ query.limit(500);
             success:function(results) {
 
             console.info("total old AuthFails needing to ARCHIVE = "+results.length);
+
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
                        var userobjectid = result.get("userObjectId");
                       var logdatedate = result.get("logDateDate");
-                      //var place = result.get("place");
-                      if (result.get("userLocation")) {
+
+
                         var userlocation = result.get("userLocation");
 
-                      }
-
-
-                      // var logdate = result.get("logDate");
-                      // var type = result.get("type");
 
 
                        var ActOrig = Parse.Object.extend("AuthFail_2017");
@@ -336,15 +332,8 @@ query.limit(500);
 
                        Act.set("userObjectId",userobjectid);
                        Act.set("logDateDate",logdatedate);
-                      // Act.set("place",place);
-                       if (userlocation) {
-                          Act.set("userLocation",userLocation);
-                       }
 
-                      //// Act.set("logDate",logdate);
-                       //Act.set("type",type);
-
-
+                       Act.set("userLocation",userLocation);
 
 
                       Act.save(null, {
