@@ -263,7 +263,7 @@ query.limit(1000);
                       Act.save(null, {
   success: function(Act) {
     // Execute any logic that should take place after the object is saved.
-    //console.info('Sale archived with label ='+salelabel);
+    console.info('Activity archived with label');
     //status.success("SZSales completed")
     //res.send("success");
      //status.success("Score Migration successfull");
