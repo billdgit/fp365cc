@@ -307,7 +307,7 @@ var query = new Parse.Query(actQuery);
 
 query.limit(1000);
 
-var day = new Date(12-30-2017);
+var day = new Date(2017-12-31);
 
 query.greaterThan("logDateDate",day );
     query.find({
