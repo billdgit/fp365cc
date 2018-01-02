@@ -114,7 +114,7 @@ query.limit(1000);
                        var Hours2017 = Parse.Object.extend("Hours_2017");
 
                        var Hours = new Hours2017();
-                       
+
                        Hours.set("logDateDate",logdatedate);
                        Hours.set("jobNotes",jobnotes);
                        Hours.set("jobName",jobname);
@@ -131,7 +131,7 @@ query.limit(1000);
                       Hours.save(null, {
   success: function(Hours) {
     // Execute any logic that should take place after the object is saved.
-    //console.info('Sale archived with label ='+salelabel);
+    console.info('Sale archived with label ='+salelabel);
     //status.success("SZSales completed")
     //res.send("success");
      //status.success("Score Migration successfull");
