@@ -302,47 +302,47 @@ Parse.Cloud.job("Migrate_Activity", function(request, status) {
 
 
 
-var actQuery = Parse.Object.extend("Activity_2017");
+var actQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(actQuery);
 
-query.limit(25);
+query.limit(500);
 
 // var day = new Date(2017-12-31);
-query.descending("logDateDate");
+//query.descending("logDateDate");
 
     query.find({
             success:function(results) {
 
-            console.info("total old activity needing to ARCHIVE = "+results.length);
+            console.info("total old AuthFails needing to ARCHIVE = "+results.length);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
                        var userobjectid = result.get("userObjectId");
                       var logdatedate = result.get("logDateDate");
-                      var place = result.get("place");
+                      //var place = result.get("place");
                       if (result.get("userLocation")) {
                         var userlocation = result.get("userLocation");
 
                       }
 
 
-                      var logdate = result.get("logDate");
-                      var type = result.get("type");
+                      // var logdate = result.get("logDate");
+                      // var type = result.get("type");
 
 
-                       var ActOrig = Parse.Object.extend("Activity");
+                       var ActOrig = Parse.Object.extend("AuthFail_2017");
 
                        var Act = new ActOrig();
 
                        Act.set("userObjectId",userobjectid);
                        Act.set("logDateDate",logdatedate);
-                       Act.set("place",place);
+                      // Act.set("place",place);
                        if (userlocation) {
-                          Act.set("userLocation",userlocation);
+                          Act.set("userLocation",userLocation);
                        }
 
-                       Act.set("logDate",logdate);
-                       Act.set("type",type);
+                      //// Act.set("logDate",logdate);
+                       //Act.set("type",type);
 
 
 
