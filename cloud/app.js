@@ -229,7 +229,7 @@ var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
 query.limit(1000);
-query.skip(6410);
+query.skip(6412);
     query.find({
             success:function(results) {
 
@@ -240,7 +240,11 @@ query.skip(6410);
                        var userobjectid = result.get("userObjectId");
                       var logdatedate = result.get("logDateDate");
                       var place = result.get("place");
-                      var userlocation = result.get("userLocation");
+                      if (result.get("userLocation")) {
+                        var userlocation = result.get("userLocation");
+
+                      }
+
 
                       var logdate = result.get("logDate");
                       var type = result.get("type");
@@ -253,7 +257,10 @@ query.skip(6410);
                        Act.set("userObjectId",userobjectid);
                        Act.set("logDateDate",logdatedate);
                        Act.set("place",place);
-                       Act.set("userLocation",userlocation);
+                       if (userlocation) {
+                          Act.set("userLocation",userlocation);
+                       }
+
                        Act.set("logDate",logdate);
                        Act.set("type",type);
 
