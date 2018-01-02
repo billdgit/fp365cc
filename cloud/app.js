@@ -229,7 +229,7 @@ var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
 query.limit(1000);
-query.skip(2850);
+query.skip(3400);
     query.find({
             success:function(results) {
 
@@ -263,7 +263,7 @@ query.skip(2850);
                       Act.save(null, {
   success: function(Act) {
     // Execute any logic that should take place after the object is saved.
-    console.info('Activity archived with label');
+    //console.info('Activity archived with label');
     //status.success("SZSales completed")
     //res.send("success");
      //status.success("Score Migration successfull");
