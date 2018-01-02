@@ -305,11 +305,11 @@ Parse.Cloud.job("Migrate_Activity", function(request, status) {
 var actQuery = Parse.Object.extend("Activity_2017");
 var query = new Parse.Query(actQuery);
 
-query.limit(1000);
+query.limit(25);
 
-var day = new Date(2017-12-31);
+// var day = new Date(2017-12-31);
+query.descending("logDateDate");
 
-query.greaterThan("logDateDate",day );
     query.find({
             success:function(results) {
 
