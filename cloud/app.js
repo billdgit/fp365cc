@@ -32,9 +32,9 @@ query.limit(1000);
                       var daysinputin = result.get("daysInputIn");
 
 
-                       var Score2017 = Parse.Object.extend("Score_2017");
+                       var Score2018 = Parse.Object.extend("Score_2018");
 
-                       var Score = new Score2017();
+                       var Score = new Score2018();
 
                        Score.set("firstScore",firstscore);
                        Score.set("secondScore",secondscore);
@@ -58,16 +58,16 @@ query.limit(1000);
                       Score.save(null, {
   success: function(Score) {
     // Execute any logic that should take place after the object is saved.
-    console.info('Sale archived with label ='+salelabel);
+    //console.info('Sale archived with label ='+salelabel);
     //status.success("SZSales completed")
     //res.send("success");
-     //status.success("Score Migration successfull");
+     status.success("Score Migration successfull");
 
   },
   error: function(result, error) {
     // Execute any logic that should take place if the save fails.
     // error is a Parse.Error with an error code and description.
-    console.info('Failed to update sale, with error code: ' + error.message);
+    console.info('Failed to update score, with error code: ' + error.message);
 
     //res.send("fail");
   }
@@ -111,9 +111,9 @@ query.limit(1000);
                       var userobjectid = result.get("userObjectId");
 
 
-                       var Hours2017 = Parse.Object.extend("Hours_2017");
+                       var Hours2018 = Parse.Object.extend("Hours_2018");
 
-                       var Hours = new Hours2017();
+                       var Hours = new Hours2018();
 
                        Hours.set("logDateDate",logdatedate);
                        Hours.set("jobNotes",jobnotes);
@@ -131,10 +131,10 @@ query.limit(1000);
                       Hours.save(null, {
   success: function(Hours) {
     // Execute any logic that should take place after the object is saved.
-    console.info('Sale archived with label ='+salelabel);
+    //console.info('Sale archived with label ='+salelabel);
     //status.success("SZSales completed")
     //res.send("success");
-     //status.success("Score Migration successfull");
+     status.success("Score Migration successfull");
 
   },
   error: function(result, error) {
@@ -180,9 +180,9 @@ query.limit(1000);
                       var file = result.get("file");
 
 
-                       var Docs2017 = Parse.Object.extend("Document_2017");
+                       var Docs2018 = Parse.Object.extend("Document_2018");
 
-                       var Docs = new Docs2017();
+                       var Docs = new Docs2018();
 
                        Docs.set("userObjectId",userobjectid);
                        Docs.set("folder",folder);
@@ -198,7 +198,7 @@ query.limit(1000);
     //console.info('Sale archived with label ='+salelabel);
     //status.success("SZSales completed")
     //res.send("success");
-     //status.success("Score Migration successfull");
+     status.success("Docs Migration successfull");
 
   },
   error: function(result, error) {
@@ -223,91 +223,92 @@ query.limit(1000);
 
 });
 
-// Parse.Cloud.job("Migrate_Activity", function(request, status) {
-//
-// var actQuery = Parse.Object.extend("Activity");
-// var query = new Parse.Query(actQuery);
-//
-// query.limit(1000);
-// query.skip(7412);
-//     query.find({
-//             success:function(results) {
-//
-//             console.info("total old activity needing to ARCHIVE = "+results.length);
-//                 for (var i = 0; i < results.length; i++) {
-//                        var result = results[i];
-//
-//                        var userobjectid = result.get("userObjectId");
-//                       var logdatedate = result.get("logDateDate");
-//                       var place = result.get("place");
-//                       if (result.get("userLocation")) {
-//                         var userlocation = result.get("userLocation");
-//
-//                       }
-//
-//
-//                       var logdate = result.get("logDate");
-//                       var type = result.get("type");
-//
-//
-//                        var Act2017 = Parse.Object.extend("Activity_2017");
-//
-//                        var Act = new Act2017();
-//
-//                        Act.set("userObjectId",userobjectid);
-//                        Act.set("logDateDate",logdatedate);
-//                        Act.set("place",place);
-//                        if (userlocation) {
-//                           Act.set("userLocation",userlocation);
-//                        }
-//
-//                        Act.set("logDate",logdate);
-//                        Act.set("type",type);
-//
-//
-//
-//
-//                       Act.save(null, {
-//   success: function(Act) {
-//     // Execute any logic that should take place after the object is saved.
-//     //console.info('Activity archived with label');
-//     //status.success("SZSales completed")
-//     //res.send("success");
-//      //status.success("Score Migration successfull");
-//
-//   },
-//   error: function(result, error) {
-//     // Execute any logic that should take place if the save fails.
-//     // error is a Parse.Error with an error code and description.
-//     console.info('Failed to update Activity, with error code: ' + error.message);
-//
-//     //res.send("fail");
-//   }
-// });
-//
-//
-//                 }
-//
-//                       status.success("Activity Migration successfull");
-//             },
-//             error: function(error) {
-//             status.error("Uh oh, something went wrong.");
-//             console.info("Failed!");
-//             }
-//     })
-//
-// });
-
 Parse.Cloud.job("Migrate_Activity", function(request, status) {
+
+var actQuery = Parse.Object.extend("Activity");
+var query = new Parse.Query(actQuery);
+
+query.limit(1000);
+//query.skip(1000);
+    query.find({
+            success:function(results) {
+
+            console.info("total old activity needing to ARCHIVE = "+results.length);
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+
+                       var userobjectid = result.get("userObjectId");
+                      var logdatedate = result.get("logDateDate");
+                      var place = result.get("place");
+                      if (result.get("userLocation")) {
+                        var userlocation = result.get("userLocation");
+
+                      }
+
+
+                      var logdate = result.get("logDate");
+                      var type = result.get("type");
+
+
+                       var Act2018 = Parse.Object.extend("Activity_2018");
+
+                       var Act = new Act2018();
+
+                       Act.set("userObjectId",userobjectid);
+                       Act.set("logDateDate",logdatedate);
+                       Act.set("place",place);
+                       if (userlocation) {
+                          Act.set("userLocation",userlocation);
+                       }
+
+                       Act.set("logDate",logdate);
+                       Act.set("type",type);
+
+
+
+
+                      Act.save(null, {
+  success: function(Act) {
+    // Execute any logic that should take place after the object is saved.
+    //console.info('Activity archived with label');
+    //status.success("SZSales completed")
+    //res.send("success");
+     //status.success("Score Migration successfull");
+
+  },
+  error: function(result, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and description.
+    console.info('Failed to update Activity, with error code: ' + error.message);
+
+    //res.send("fail");
+  }
+});
+
+
+                }
+
+                      status.success("Activity Migration successfull");
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");
+            }
+    })
+
+});
+
+Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
 
 
 
 var actQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(actQuery);
 
-query.limit(500);
+query.limit(1000);
+//query.skip(1000);
 
-// var day = new Date(2017-12-31);
+
 //query.descending("logDateDate");
 
     query.find({
@@ -323,7 +324,7 @@ query.limit(500);
                         var userlocation = result.get("userLocation");
 
 
-                       var ActOrig = Parse.Object.extend("AuthFail_2017");
+                       var ActOrig = Parse.Object.extend("AuthFail_2018");
                        var Act = new ActOrig();
 
                        Act.set("userObjectId",userobjectid);
@@ -352,7 +353,7 @@ query.limit(500);
 
                 }
 
-                      status.success("Activity Migration successfull");
+                      status.success("AuthFail Migration successfull");
             },
             error: function(error) {
             status.error("Uh oh, something went wrong.");
