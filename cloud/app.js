@@ -233,7 +233,7 @@ query.skip(1000);
     query.find({
             success:function(results) {
 
-            console.info("total old activity needing to ARCHIVE = "+results.length);
+            console.info("total old activity needing to ARCHIVE with 1k skip = "+results.length);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
@@ -298,67 +298,67 @@ query.skip(1000);
 
 });
 
-Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
+// Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
 
 
 
-var actQuery = Parse.Object.extend("AuthFail");
-var query = new Parse.Query(actQuery);
+// var actQuery = Parse.Object.extend("AuthFail");
+// var query = new Parse.Query(actQuery);
 
-query.limit(1000);
-//query.skip(1000);
-
-
-//query.descending("logDateDate");
-
-    query.find({
-            success:function(results) {
-
-            console.info("total old AuthFails needing to ARCHIVE = "+results.length);
-
-                for (var i = 0; i < results.length; i++) {
-                       var result = results[i];
-
-                       var userobjectid = result.get("userObjectId");
-                       var logdatedate = result.get("logDateDate");
-                        var userlocation = result.get("userLocation");
+// query.limit(1000);
+// //query.skip(1000);
 
 
-                       var ActOrig = Parse.Object.extend("AuthFail_2018");
-                       var Act = new ActOrig();
+// //query.descending("logDateDate");
 
-                       Act.set("userObjectId",userobjectid);
-                       Act.set("logDateDate",logdatedate);
-                       Act.set("userLocation",userLocation);
+//     query.find({
+//             success:function(results) {
 
+//             console.info("total old AuthFails needing to ARCHIVE = "+results.length);
 
-                      Act.save(null, {
-  success: function(Act) {
-    // Execute any logic that should take place after the object is saved.
-    console.info('Activity archived with label');
-    //status.success("SZSales completed")
-    //res.send("success");
-     //status.success("Score Migration successfull");
+//                 for (var i = 0; i < results.length; i++) {
+//                        var result = results[i];
 
-  },
-  error: function(result, error) {
-    // Execute any logic that should take place if the save fails.
-    // error is a Parse.Error with an error code and description.
-    console.info('Failed to update Activity, with error code: ' + error.message);
-
-    //res.send("fail");
-  }
-});
+//                        var userobjectid = result.get("userObjectId");
+//                        var logdatedate = result.get("logDateDate");
+//                         var userlocation = result.get("userLocation");
 
 
-                }
+//                        var ActOrig = Parse.Object.extend("AuthFail_2018");
+//                        var Act = new ActOrig();
 
-                      status.success("AuthFail Migration successfull");
-            },
-            error: function(error) {
-            status.error("Uh oh, something went wrong.");
-            console.info("Failed!");
-            }
-    })
+//                        Act.set("userObjectId",userobjectid);
+//                        Act.set("logDateDate",logdatedate);
+//                        Act.set("userLocation",userLocation);
 
-});
+
+//                       Act.save(null, {
+//   success: function(Act) {
+//     // Execute any logic that should take place after the object is saved.
+//     console.info('Activity archived with label');
+//     //status.success("SZSales completed")
+//     //res.send("success");
+//      //status.success("Score Migration successfull");
+
+//   },
+//   error: function(result, error) {
+//     // Execute any logic that should take place if the save fails.
+//     // error is a Parse.Error with an error code and description.
+//     console.info('Failed to update Activity, with error code: ' + error.message);
+
+//     //res.send("fail");
+//   }
+// });
+
+
+//                 }
+
+//                       status.success("AuthFail Migration successfull");
+//             },
+//             error: function(error) {
+//             status.error("Uh oh, something went wrong.");
+//             console.info("Failed!");
+//             }
+//     })
+
+// });
