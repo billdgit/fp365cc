@@ -229,12 +229,12 @@ Parse.Cloud.job("Migrate_Activity", function(request, status) {
 
 var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
-query.skip(1400);
+query.skip(1900);
 query.limit(500);
     query.find({
             success:function(results) {
 
-            console.info("total old activity needing to 4th skip 1400 500  = "+results.length);
+            console.info("total old activity needing to 5th skip 1900 500  = "+results.length);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
@@ -315,7 +315,7 @@ query.limit(500);
                 }
               }
 
-                      status.success("Activity Migration 4th 500 successfull");
+                      status.success("Activity Migration 5th 500 successfull");
             },
             error: function(error) {
             status.error("Uh oh, something went wrong.");
