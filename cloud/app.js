@@ -524,67 +524,68 @@ error: function(myObject, error) {
 //     })
 //
 // });
-// Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
-//
-//
-//
-// var actQuery = Parse.Object.extend("AuthFail");
-// var query = new Parse.Query(actQuery);
-//
-// query.limit(1000);
-// //query.skip(1000);
-//
-//
-// //query.descending("logDateDate");
-//
-//     query.find({
-//             success:function(results) {
-//
-//             console.info("total old AuthFails needing to ARCHIVE = "+results.length);
-//
-//                 for (var i = 0; i < results.length; i++) {
-//                        var result = results[i];
-//
-//                        var userobjectid = result.get("userObjectId");
-//                        var logdatedate = result.get("logDateDate");
-//                         var userlocation = result.get("userLocation");
-//
-//
-//                        var ActOrig = Parse.Object.extend("AuthFail_2018");
-//                        var Act = new ActOrig();
-//
-//                        Act.set("userObjectId",userobjectid);
-//                        Act.set("logDateDate",logdatedate);
-//                        Act.set("userLocation",userLocation);
-//
-//
-//                       Act.save(null, {
-//   success: function(Act) {
-//     // Execute any logic that should take place after the object is saved.
-//     console.info('Activity archived with label');
-//     //status.success("SZSales completed")
-//     //res.send("success");
-//      //status.success("Score Migration successfull");
-//
-//   },
-//   error: function(result, error) {
-//     // Execute any logic that should take place if the save fails.
-//     // error is a Parse.Error with an error code and description.
-//     console.info('Failed to update Activity, with error code: ' + error.message);
-//
-//     //res.send("fail");
-//   }
-// });
-//
-//
-//                 }
-//
-//                       status.success("AuthFail Migration successfull");
-//             },
-//             error: function(error) {
-//             status.error("Uh oh, something went wrong.");
-//             console.info("Failed!");
-//             }
-//     })
-//
-// });
+Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
+
+
+
+var actQuery = Parse.Object.extend("AuthFail");
+var query = new Parse.Query(actQuery);
+
+query.limit(500);
+//query.skip(1000);
+
+
+//query.descending("logDateDate");
+
+    query.find({
+            success:function(results) {
+
+            console.info("total old AuthFails needing to ARCHIVE = "+results.length);
+
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+
+                       var userobjectid = result.get("userObjectId");
+                       var logdatedate = result.get("logDateDate");
+                        var userlocation = result.get("userLocation");
+
+
+                       var ActOrig = Parse.Object.extend("AuthFail_2018");
+                       var Act = new ActOrig();
+
+                       //Act.set("userObjectId",userobjectid);
+                       Act.set("userObjectId", {__type: "Pointer", className: "_User", objectId:userobjectid});
+                       Act.set("logDateDate",logdatedate);
+                       Act.set("userLocation",userLocation);
+
+
+                      Act.save(null, {
+  success: function(Act) {
+    // Execute any logic that should take place after the object is saved.
+    console.info('Activity archived with label');
+    //status.success("SZSales completed")
+    //res.send("success");
+     //status.success("Score Migration successfull");
+
+  },
+  error: function(result, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and description.
+    console.info('Failed to update Activity, with error code: ' + error.message);
+
+    //res.send("fail");
+  }
+});
+
+
+                }
+
+                      status.success("AuthFail Migration successfull");
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");
+            }
+    })
+
+});
