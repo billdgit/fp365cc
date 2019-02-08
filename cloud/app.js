@@ -229,8 +229,8 @@ Parse.Cloud.job("Migrate_Activity", function(request, status) {
 
 var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
-query.skip(100);
-query.limit(100);
+//query.skip(100);
+query.limit(500);
     query.find({
             success:function(results) {
 
@@ -238,16 +238,17 @@ query.limit(100);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
-                       if (result.get("userLocation")) {
-                         var userlocation = result.get("userLocation");
+                       if (result.get("logDateDate")) {
+                           var logdatedate = result.get("logDateDate");
+
 
 
 
                        if (result.get("userObjectId")) {
                          var userobjectid = result.get("userObjectId");
                        }
-                      if (result.get("logDateDate")) {
-                        var logdatedate = result.get("logDateDate");
+                      if (result.get("userLocation")) {
+                         var userlocation = result.get("userLocation");
                       }
                       if (result.get("place")) {
                         var place = result.get("place");
@@ -295,7 +296,7 @@ query.limit(100);
                       Act.save(null, {
   success: function(Act) {
     // Execute any logic that should take place after the object is saved.
-    console.info('Activity archived with place = '+place);
+    //console.info('Activity archived with place = '+place);
     //status.success("SZSales completed")
     //res.send("success");
      //status.success("Score Migration successfull");
@@ -314,7 +315,7 @@ query.limit(100);
                 }
               }
 
-                      status.success("Activity Migration 2nd 100 successfull");
+                      status.success("Activity Migration 1st 500 successfull");
             },
             error: function(error) {
             status.error("Uh oh, something went wrong.");
