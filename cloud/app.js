@@ -238,6 +238,11 @@ query.limit(3000);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
+                       if (result.get("userLocation")) {
+                         var userlocation = result.get("userLocation");
+
+
+
                        if (result.get("userObjectId")) {
                          var userobjectid = result.get("userObjectId");
                        }
@@ -248,10 +253,7 @@ query.limit(3000);
                         var place = result.get("place");
                       }
 
-                      if (result.get("userLocation")) {
-                        var userlocation = result.get("userLocation");
 
-                      }
 
                       if (result.get("logDate")) {
                           var logdate = result.get("logDate");
@@ -310,6 +312,7 @@ query.limit(3000);
 
 
                 }
+              }
 
                       status.success("Activity Migration first 3000 successfull");
             },
