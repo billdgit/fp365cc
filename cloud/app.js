@@ -335,8 +335,8 @@ var day2 = new Date(2018,12,31);
 
 
 query.greaterThan("logDateDate", day1);
-query.lessThan(("logDateDate", day2);
-query.limit(1000);
+query.lessThan("logDateDate", day2);
+query.limit(3000);
     query.find({
             success:function(results) {
 
