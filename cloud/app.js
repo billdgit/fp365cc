@@ -242,7 +242,7 @@ query.limit(1000);
                       if (result.get("logDateDate")) {
                         var logdatedate = result.get("logDateDate");
                       }
-                      if (result.get("place");) {
+                      if (result.get("place")) {
                         var place = result.get("place");
                       }
 
