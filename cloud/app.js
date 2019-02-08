@@ -331,7 +331,7 @@ var actQuery = Parse.Object.extend("Activity_2018");
 var query = new Parse.Query(actQuery);
 
 var day1 = new Date(2018,00,01);
-var day2 = new Date(2018,12,31);
+var day2 = new Date(2018,11,31);
 
 
 query.greaterThan("logDateDate", day1);
