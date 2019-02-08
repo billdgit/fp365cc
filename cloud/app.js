@@ -527,7 +527,7 @@ error: function(myObject, error) {
 Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
 
 
-
+ var ActOrig = Parse.Object.extend("AuthFail_2018");
 var actQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(actQuery);
 
@@ -545,24 +545,41 @@ query.limit(500);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
-                       var userobjectid = result.get("userObjectId");
-                       var logdatedate = result.get("logDateDate");
-                        var userlocation = result.get("userLocation");
+                       if (result.get("userObjectId")) {
+                          var userobjectid = result.get("userObjectId");
+                       }
+                       if (result.get("logDateDate")) {
+                          var logdatedate = result.get("logDateDate");
+                       }
+                      if (result.get("userLocation")) {
+                          var userlocation = result.get("userLocation");
+                      }
 
 
-                       var ActOrig = Parse.Object.extend("AuthFail_2018");
+
+
+
                        var Act = new ActOrig();
 
+                       console.info("got this far = "+userobjectid);
+
                        //Act.set("userObjectId",userobjectid);
-                       Act.set("userObjectId", {__type: "Pointer", className: "_User", objectId:userobjectid});
-                       Act.set("logDateDate",logdatedate);
-                       Act.set("userLocation",userLocation);
+                       if (userobjectid) {
+                          Act.set("userObjectId", {__type: "Pointer", className: "User", objectId:userobjectid});
+                       }
+                      if (logdatedate) {
+                           Act.set("logDateDate",logdatedate);
+                      }
+                      if (userLocation) {
+                        Act.set("userLocation",userLocation);
+                      }
+
 
 
                       Act.save(null, {
   success: function(Act) {
     // Execute any logic that should take place after the object is saved.
-    console.info('Activity archived with label');
+    console.info('Activity archived with '+userobjectid);
     //status.success("SZSales completed")
     //res.send("success");
      //status.success("Score Migration successfull");
