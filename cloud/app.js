@@ -334,7 +334,7 @@ var day1 = new Date(2018,00,01);
 var day2 = new Date(2019,00,01);
 
 
-query.greaterThan("logDateDate", day1);
+//query.greaterThan("logDateDate", day1);
 query.lessThan("logDateDate", day2);
 query.limit(500);
     query.find({
