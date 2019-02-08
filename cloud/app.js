@@ -229,7 +229,7 @@ Parse.Cloud.job("Migrate_Activity", function(request, status) {
 
 var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
-
+query.skip(100);
 query.limit(100);
     query.find({
             success:function(results) {
@@ -314,7 +314,7 @@ query.limit(100);
                 }
               }
 
-                      status.success("Activity Migration first 3000 successfull");
+                      status.success("Activity Migration 2nd 100 successfull");
             },
             error: function(error) {
             status.error("Uh oh, something went wrong.");
