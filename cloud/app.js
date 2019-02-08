@@ -229,7 +229,6 @@ var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
 query.limit(1000);
-//query.skip(1000);
     query.find({
             success:function(results) {
 
@@ -237,32 +236,54 @@ query.limit(1000);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
-                       var userobjectid = result.get("userObjectId");
-                      var logdatedate = result.get("logDateDate");
-                      var place = result.get("place");
+                       if (result.get("userObjectId")) {
+                         var userobjectid = result.get("userObjectId");
+                       }
+                      if (result.get("logDateDate")) {
+                        var logdatedate = result.get("logDateDate");
+                      }
+                      if (result.get("place");) {
+                        var place = result.get("place");
+                      }
+
                       if (result.get("userLocation")) {
                         var userlocation = result.get("userLocation");
 
                       }
 
+                      if (result.get("logDate")) {
+                          var logdate = result.get("logDate");
+                      }
+                      if (result.get("type")) {
+                            var type = result.get("type");
+                      }
 
-                      var logdate = result.get("logDate");
-                      var type = result.get("type");
 
 
                        var Act2018 = Parse.Object.extend("Activity_2018");
 
                        var Act = new Act2018();
+                       if (userobjectid) {
+                         Act.set("userObjectId",userobjectid);
+                       }
+                       if (logdatedate) {
+                         Act.set("logDateDate",logdatedate);
+                       }
 
-                       Act.set("userObjectId",userobjectid);
-                       Act.set("logDateDate",logdatedate);
-                       Act.set("place",place);
+                       if (place) {
+                            Act.set("place",place);
+                       }
+
                        if (userlocation) {
                           Act.set("userLocation",userlocation);
                        }
+                       if (logdate) {
+                            Act.set("logDate",logdate);
+                       }
+                       if (type) {
+                            Act.set("type",type);
+                       }
 
-                       Act.set("logDate",logdate);
-                       Act.set("type",type);
 
 
 
@@ -273,7 +294,7 @@ query.limit(1000);
     //console.info('Activity archived with label');
     //status.success("SZSales completed")
     //res.send("success");
-     status.success("Score Migration successfull");
+     //status.success("Score Migration successfull");
 
   },
   error: function(result, error) {
