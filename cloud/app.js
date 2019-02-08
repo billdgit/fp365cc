@@ -331,16 +331,16 @@ var actQuery = Parse.Object.extend("Activity_2018");
 var query = new Parse.Query(actQuery);
 
 var day1 = new Date(2018,00,01);
-var day2 = new Date(2018,11,31);
+var day2 = new Date(2019,00,01);
 
 
 query.greaterThan("logDateDate", day1);
 query.lessThan("logDateDate", day2);
-query.limit(3000);
+query.limit(500);
     query.find({
             success:function(results) {
 
-            console.info("total old activity needing to ARCHIVE 2nd 1000 = "+results.length);
+            console.info("total 2018 activity needing to cleam = "+results.length);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
