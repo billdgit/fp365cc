@@ -325,17 +325,17 @@ query.limit(500);
 
 });
 
-Parse.Cloud.job("Clean_Activity_2018", function(request, status) {
+Parse.Cloud.job("Clean_Activity", function(request, status) {
 
-var actQuery = Parse.Object.extend("Activity_2018");
+var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
 var day1 = new Date(2018,00,01);
-var day2 = new Date(2019,00,01);
+var day2 = new Date(2018,12,31);
 
 
-query.greaterThan("logDateDate", day2);
-//query.lessThan("logDateDate", day2);
+//query.greaterThan("logDateDate", day2);
+query.lessThan("logDateDate", day2);
 query.limit(500);
     query.find({
             success:function(results) {
@@ -344,20 +344,20 @@ query.limit(500);
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
-                       //console.info("logDateDate = "+result.get("logDateDate"))
+                      console.info("logDateDate = "+result.get("logDateDate"))
 
-result.destroy({
-success: function(myObject) {
-// The object was deleted from the Parse Cloud
-//console.info("Sale deleted from SampleSales = "+salelabel);
-
-//console.info("Destroy: "+result);
-},
-error: function(myObject, error) {
-// The delete failed.
-// error is a Parse.Error with an error code and message.
-}
-});
+// result.destroy({
+// success: function(myObject) {
+// // The object was deleted from the Parse Cloud
+// //console.info("Sale deleted from SampleSales = "+salelabel);
+//
+// //console.info("Destroy: "+result);
+// },
+// error: function(myObject, error) {
+// // The delete failed.
+// // error is a Parse.Error with an error code and message.
+// }
+// });
 
 
 
