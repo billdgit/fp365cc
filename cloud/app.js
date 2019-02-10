@@ -614,7 +614,7 @@ Parse.Cloud.job("AuthFailJob", function(request, status) {
 var oldQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(oldQuery);
 
-query.limit(1500);
+query.limit(650);
 
     query.find({
             success:function(results) {
@@ -624,7 +624,7 @@ query.limit(1500);
                        var result = results[i];
 
                        if (result.get("userObjectId")) {
-                          var userobjectid = result.get("userObjectId");
+                          var userobjectid = result.get("userObjectId").text();
                        }
                        if (result.get("logDateDate")) {
                           var logdatedate = result.get("logDateDate");
