@@ -607,3 +607,78 @@ query.limit(100);
     })
 
 });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Parse.Cloud.job("AuthFailJob", function(request, status) {
+
+var oldQuery = Parse.Object.extend("AuthFail");
+var query = new Parse.Query(oldQuery);
+
+query.limit(100);
+
+    query.find({
+            success:function(results) {
+
+            console.info("total AuthFail = "+results.length);
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+
+                       if (result.get("userObjectId")) {
+                          var userobjectid = result.get("userObjectId");
+                       }
+                       if (result.get("logDateDate")) {
+                          var logdatedate = result.get("logDateDate");
+                       }
+                      if (result.get("userLocation")) {
+                          var userlocation = result.get("userLocation");
+                      }
+
+
+                       var af2018 = Parse.Object.extend("AuthFail_2018");
+
+                       var auth = new af2018();
+
+                       if (userobjectid) {
+                         auth.set("userObjectId", {__type: "Pointer", className: "User", objectId:userobjectid});
+                       }
+                      if (logdatedate) {
+                           auth.set("logDateDate",logdatedate);
+                      }
+                      if (userLocation) {
+                        auth.set("userLocation",userLocation);
+                      }
+
+
+
+
+
+                      auth.save(null, {
+  success: function(auth) {
+    // Execute any logic that should take place after the object is saved.
+    //console.info('Sale archived with label ='+salelabel);
+    //status.success("SZSales completed")
+    //res.send("success");
+     status.success("AuthFail Migration successfull");
+
+  },
+  error: function(result, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and description.
+    console.info('Failed to update auth, with error code: ' + error.message);
+
+    //res.send("fail");
+  }
+});
+
+
+                }
+
+                      status.success("AuthFail Migration successfull");
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");
+            }
+    })
+
+});
