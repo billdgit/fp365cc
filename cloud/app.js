@@ -611,6 +611,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Parse.Cloud.job("AuthFailJob", function(request, status) {
 
+   var af2018 = Parse.Object.extend("AuthFail_2018");
+
 var oldQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(oldQuery);
 
@@ -625,7 +627,7 @@ query.limit(650);
 
                        if (result.get("userObjectId")) {
                           var userobjectid = result.get("userObjectId");
-
+                          console.info("userobjectid =  "+userobjectid);
 
                        }
                        if (result.get("logDateDate")) {
@@ -637,7 +639,7 @@ query.limit(650);
                       }
 
 
-                       var af2018 = Parse.Object.extend("AuthFail_2018");
+
 
                        var auth = new af2018();
 
