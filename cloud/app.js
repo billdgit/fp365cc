@@ -566,7 +566,7 @@ query.limit(100);
 
                        //Act.set("userObjectId",userobjectid);
                        if (userobjectid) {
-                          Act.set("userObjectId", {__type: "Pointer", className: "User", objectId:userobjectid});
+                        //  Act.set("userObjectId", {__type: "Pointer", className: "User", objectId:userobjectid});
                        }
                       if (logdatedate) {
                            Act.set("logDateDate",logdatedate);
