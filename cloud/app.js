@@ -223,158 +223,158 @@
 //
 // });
 
-Parse.Cloud.job("Migrate_Activity", function(request, status) {
+// Parse.Cloud.job("Migrate_Activity", function(request, status) {
+//
+//    var Act2018 = Parse.Object.extend("Activity_2018");
+//
+// var actQuery = Parse.Object.extend("Activity");
+// var query = new Parse.Query(actQuery);
+// query.skip(1900);
+// query.limit(500);
+//     query.find({
+//             success:function(results) {
+//
+//             console.info("total old activity needing to 5th skip 1900 500  = "+results.length);
+//                 for (var i = 0; i < results.length; i++) {
+//                        var result = results[i];
+//
+//                        if (result.get("logDateDate")) {
+//                            var logdatedate = result.get("logDateDate");
+//
+//
+//
+//
+//                        if (result.get("userObjectId")) {
+//                          var userobjectid = result.get("userObjectId");
+//                        }
+//                       if (result.get("userLocation")) {
+//                          var userlocation = result.get("userLocation");
+//                       }
+//                       if (result.get("place")) {
+//                         var place = result.get("place");
+//                       }
+//
+//
+//
+//                       if (result.get("logDate")) {
+//                           var logdate = result.get("logDate");
+//                       }
+//                       if (result.get("type")) {
+//                             var type = result.get("type");
+//                       }
+//
+//
+//
+//
+//
+//                        var Act = new Act2018();
+//                        if (userobjectid) {
+//                          Act.set("userObjectId",userobjectid);
+//                        }
+//                        if (logdatedate) {
+//                          Act.set("logDateDate",logdatedate);
+//                        }
+//
+//                        if (place) {
+//                             Act.set("place",place);
+//                        }
+//
+//                        if (userlocation) {
+//                           Act.set("userLocation",userlocation);
+//                        }
+//                        if (logdate) {
+//                             Act.set("logDate",logdate);
+//                        }
+//                        if (type) {
+//                             Act.set("type",type);
+//                        }
+//
+//
+//
+//
+//
+//                       Act.save(null, {
+//   success: function(Act) {
+//     // Execute any logic that should take place after the object is saved.
+//     //console.info('Activity archived with place = '+place);
+//     //status.success("SZSales completed")
+//     //res.send("success");
+//      //status.success("Score Migration successfull");
+//
+//   },
+//   error: function(result, error) {
+//     // Execute any logic that should take place if the save fails.
+//     // error is a Parse.Error with an error code and description.
+//     console.info('Failed to update Activity, with error code: ' + error.message);
+//
+//     //res.send("fail");
+//   }
+// });
+//
+//
+//                 }
+//               }
+//
+//                       status.success("Activity Migration 5th 500 successfull");
+//             },
+//             error: function(error) {
+//             status.error("Uh oh, something went wrong.");
+//             console.info("Failed!");
+//             }
+//     })
+//
+// });
 
-   var Act2018 = Parse.Object.extend("Activity_2018");
-
-var actQuery = Parse.Object.extend("Activity");
-var query = new Parse.Query(actQuery);
-query.skip(1900);
-query.limit(500);
-    query.find({
-            success:function(results) {
-
-            console.info("total old activity needing to 5th skip 1900 500  = "+results.length);
-                for (var i = 0; i < results.length; i++) {
-                       var result = results[i];
-
-                       if (result.get("logDateDate")) {
-                           var logdatedate = result.get("logDateDate");
-
-
-
-
-                       if (result.get("userObjectId")) {
-                         var userobjectid = result.get("userObjectId");
-                       }
-                      if (result.get("userLocation")) {
-                         var userlocation = result.get("userLocation");
-                      }
-                      if (result.get("place")) {
-                        var place = result.get("place");
-                      }
-
-
-
-                      if (result.get("logDate")) {
-                          var logdate = result.get("logDate");
-                      }
-                      if (result.get("type")) {
-                            var type = result.get("type");
-                      }
-
-
-
-
-
-                       var Act = new Act2018();
-                       if (userobjectid) {
-                         Act.set("userObjectId",userobjectid);
-                       }
-                       if (logdatedate) {
-                         Act.set("logDateDate",logdatedate);
-                       }
-
-                       if (place) {
-                            Act.set("place",place);
-                       }
-
-                       if (userlocation) {
-                          Act.set("userLocation",userlocation);
-                       }
-                       if (logdate) {
-                            Act.set("logDate",logdate);
-                       }
-                       if (type) {
-                            Act.set("type",type);
-                       }
-
-
-
-
-
-                      Act.save(null, {
-  success: function(Act) {
-    // Execute any logic that should take place after the object is saved.
-    //console.info('Activity archived with place = '+place);
-    //status.success("SZSales completed")
-    //res.send("success");
-     //status.success("Score Migration successfull");
-
-  },
-  error: function(result, error) {
-    // Execute any logic that should take place if the save fails.
-    // error is a Parse.Error with an error code and description.
-    console.info('Failed to update Activity, with error code: ' + error.message);
-
-    //res.send("fail");
-  }
-});
-
-
-                }
-              }
-
-                      status.success("Activity Migration 5th 500 successfull");
-            },
-            error: function(error) {
-            status.error("Uh oh, something went wrong.");
-            console.info("Failed!");
-            }
-    })
-
-});
-
-Parse.Cloud.job("Clean_Activity", function(request, status) {
-
-var actQuery = Parse.Object.extend("Activity");
-var query = new Parse.Query(actQuery);
-
-var day1 = new Date(2018,00,01);
-var day2 = new Date(2018,10,20);
-
-
-//query.greaterThan("logDateDate", day2);
-query.lessThan("logDateDate", day2);
-query.limit(50);
-    query.find({
-            success:function(results) {
-
-            console.info("total 2018 activity needing to cleam = "+results.length);
-                for (var i = 0; i < results.length; i++) {
-                       var result = results[i];
-
-                      console.info("logDateDate = "+result.get("logDateDate"))
-
-result.destroy({
-success: function(myObject) {
-// The object was deleted from the Parse Cloud
-//console.info("Sale deleted from SampleSales = "+salelabel);
-
-//console.info("Destroy: "+result);
-console.info("deleted = "+result.get("logDateDate"));
-},
-error: function(myObject, error) {
-// The delete failed.
-// error is a Parse.Error with an error code and message.
-}
-});
-
-
-
-
-
-                }
-
-                      status.success("Activity_2018 cleaned");
-            },
-            error: function(error) {
-            status.error("Uh oh, something went wrong.");
-            console.info("Failed!");
-            }
-    })
-
-});
+// Parse.Cloud.job("Clean_Activity", function(request, status) {
+//
+// var actQuery = Parse.Object.extend("Activity");
+// var query = new Parse.Query(actQuery);
+//
+// var day1 = new Date(2018,00,01);
+// var day2 = new Date(2018,10,20);
+//
+//
+// //query.greaterThan("logDateDate", day2);
+// query.lessThan("logDateDate", day2);
+// query.limit(50);
+//     query.find({
+//             success:function(results) {
+//
+//             console.info("total 2018 activity needing to cleam = "+results.length);
+//                 for (var i = 0; i < results.length; i++) {
+//                        var result = results[i];
+//
+//                       console.info("logDateDate = "+result.get("logDateDate"))
+//
+// result.destroy({
+// success: function(myObject) {
+// // The object was deleted from the Parse Cloud
+// //console.info("Sale deleted from SampleSales = "+salelabel);
+//
+// //console.info("Destroy: "+result);
+// console.info("deleted = "+result.get("logDateDate"));
+// },
+// error: function(myObject, error) {
+// // The delete failed.
+// // error is a Parse.Error with an error code and message.
+// }
+// });
+//
+//
+//
+//
+//
+//                 }
+//
+//                       status.success("Activity_2018 cleaned");
+//             },
+//             error: function(error) {
+//             status.error("Uh oh, something went wrong.");
+//             console.info("Failed!");
+//             }
+//     })
+//
+// });
 
 // Parse.Cloud.job("Migrate_Activity_1000", function(request, status) {
 //
@@ -532,7 +532,7 @@ Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
 var actQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(actQuery);
 
-query.limit(500);
+query.limit(100);
 //query.skip(1000);
 
 
@@ -562,7 +562,7 @@ query.limit(500);
 
                        var Act = new ActOrig();
 
-                       console.info("got this far = "+userobjectid);
+                       //console.info("got this far = "+userobjectid);
 
                        //Act.set("userObjectId",userobjectid);
                        if (userobjectid) {
@@ -575,7 +575,7 @@ query.limit(500);
                         Act.set("userLocation",userLocation);
                       }
 
-
+                      console.info("the three to write = "+userobjectid+" "+logdatedate+" "+userLocation);
 
                       Act.save(null, {
   success: function(Act) {
