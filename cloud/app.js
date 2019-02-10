@@ -624,7 +624,9 @@ query.limit(650);
                        var result = results[i];
 
                        if (result.get("userObjectId")) {
-                          var userobjectid = result.get("userObjectId").text();
+                          var userobjectid = result.get("userObjectId");
+
+
                        }
                        if (result.get("logDateDate")) {
                           var logdatedate = result.get("logDateDate");
@@ -640,7 +642,7 @@ query.limit(650);
                        var auth = new af2018();
 
                        if (userobjectid) {
-                         auth.set("userObjectId", {__type: "Pointer", className: "User", objectId: userobjectid});
+                         auth.set("userObjectId", userobjectid});
                        }
                       if (logdatedate) {
                            auth.set("logDateDate",logdatedate);
