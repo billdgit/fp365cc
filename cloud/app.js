@@ -630,7 +630,8 @@ query.limit(100);
                           var logdatedate = result.get("logDateDate");
                        }
                       if (result.get("userLocation")) {
-                          var userlocation = result.get("userLocation");
+                        //var point = new Parse.GeoPoint({latitude: 40.0, longitude: -30.0});
+                          var userlocation = new Parse.GeoPoint(result.get("userLocation"));
                       }
 
 
@@ -645,7 +646,7 @@ query.limit(100);
                            auth.set("logDateDate",logdatedate);
                       }
                       if (userLocation) {
-                        auth.set("userLocation",userLocation);
+                        auth.set("userLocation",userlocation);
                       }
 
 
