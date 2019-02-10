@@ -331,12 +331,12 @@ var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
 var day1 = new Date(2018,00,01);
-var day2 = new Date(2018,10,31);
+var day2 = new Date(2018,10,20);
 
 
 //query.greaterThan("logDateDate", day2);
 query.lessThan("logDateDate", day2);
-query.limit(100);
+query.limit(50);
     query.find({
             success:function(results) {
 
