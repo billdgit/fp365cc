@@ -583,7 +583,7 @@ query.limit(100);
     console.info('Activity archived with '+userobjectid);
     //status.success("SZSales completed")
     //res.send("success");
-     //status.success("Score Migration successfull");
+     status.success("authfail Migration successfull");
 
   },
   error: function(result, error) {
@@ -598,7 +598,7 @@ query.limit(100);
 
                 }
 
-                      status.success("AuthFail Migration successfull");
+                      //status.success("AuthFail Migration successfull");
             },
             error: function(error) {
             status.error("Uh oh, something went wrong.");
