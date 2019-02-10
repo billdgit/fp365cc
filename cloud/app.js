@@ -528,7 +528,7 @@
 Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
 
 
- var ActOrig = Parse.Object.extend("AuthFail_2018");
+
 var actQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(actQuery);
 
@@ -541,7 +541,7 @@ query.limit(100);
     query.find({
             success:function(results) {
 
-            console.info("total old AuthFails needing to ARCHIVE = "+results.length);
+            console.info("total  AuthFails returned = "+results.length);
 
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
@@ -559,14 +559,14 @@ query.limit(100);
 
 
 
-
+                       var ActOrig = Parse.Object.extend("AuthFail_2018");
                        var Act = new ActOrig();
 
                        //console.info("got this far = "+userobjectid);
 
                        //Act.set("userObjectId",userobjectid);
                        if (userobjectid) {
-                        //  Act.set("userObjectId", {__type: "Pointer", className: "User", objectId:userobjectid});
+                         Act.set("userObjectId", {__type: "Pointer", className: "User", objectId:userobjectid});
                        }
                       if (logdatedate) {
                            Act.set("logDateDate",logdatedate);
