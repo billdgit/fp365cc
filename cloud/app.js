@@ -640,7 +640,7 @@ query.limit(1500);
                        var auth = new af2018();
 
                        if (userobjectid) {
-                         auth.set("userObjectId",userobjectid);
+                         auth.set("userObjectId", {__type: "Pointer", className: "_User", objectId: userobjectid});
                        }
                       if (logdatedate) {
                            auth.set("logDateDate",logdatedate);
