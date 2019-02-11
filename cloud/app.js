@@ -684,3 +684,57 @@ query.limit(1000);
     })
 
 });
+
+
+Parse.Cloud.job("Clean_AuthFail", function(request, status) {
+
+var actQuery = Parse.Object.extend("AuthFail");
+var query = new Parse.Query(actQuery);
+
+var day1 = new Date(2018,00,01);
+var day2 = new Date(2018,10,20);
+
+
+//query.greaterThan("logDateDate", day2);
+query.startsWith("logDateDate", "2018");
+query.startsWith("logDateDate", "2017");
+
+query.limit(1500);
+    query.find({
+            success:function(results) {
+
+            console.info("total 2018 activity needing to cleam = "+results.length);
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+
+                      //console.info("logDateDate = "+result.get("logDateDate"))
+
+result.destroy({
+success: function(myObject) {
+// The object was deleted from the Parse Cloud
+//console.info("Sale deleted from SampleSales = "+salelabel);
+
+//console.info("Destroy: "+result);
+console.info("deleted = "+result.get("logDateDate"));
+},
+error: function(myObject, error) {
+// The delete failed.
+// error is a Parse.Error with an error code and message.
+}
+});
+
+
+
+
+
+                }
+
+                      status.success("aUTHFAIL cleaned");
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");
+            }
+    })
+
+});
