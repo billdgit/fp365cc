@@ -688,7 +688,7 @@ query.limit(1000);
 
 Parse.Cloud.job("Clean_AuthFail", function(request, status) {
 
-var actQuery = Parse.Object.extend("AuthFail_2017");
+var actQuery = Parse.Object.extend("AuthFail_2018");
 var query = new Parse.Query(actQuery);
 
 var day1 = new Date(2018,00,01);
@@ -696,7 +696,7 @@ var day2 = new Date(2018,10,20);
 
 
 //query.greaterThan("logDateDate", day2);
-query.startsWith("logDateDate", "2018");
+query.startsWith("logDateDate", "2017");
 //query.startsWith("logDateDate", "2017");
 
 query.limit(1500);
