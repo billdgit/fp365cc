@@ -688,7 +688,7 @@ query.limit(1000);
 
 Parse.Cloud.job("Clean_AuthFail", function(request, status) {
 
-var actQuery = Parse.Object.extend("AuthFail");
+var actQuery = Parse.Object.extend("AuthFail_2017");
 var query = new Parse.Query(actQuery);
 
 var day1 = new Date(2018,00,01);
