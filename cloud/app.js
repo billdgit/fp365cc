@@ -611,8 +611,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Parse.Cloud.job("AuthFailJob", function(request, status) {
 
-   var af2018 = Parse.Object.extend("AuthFail_2018");
-
 var oldQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(oldQuery);
 
@@ -626,9 +624,10 @@ query.limit(650);
                        var result = results[i];
 
                        if (result.get("userObjectId")) {
-                          var userobjectid = result.get("userObjectId");
-                          console.info("userobjectid =  "+userobjectid);
+                          var userobject = result.get("userObjectId");
+                        var   userobjectid = userobject.objectid;
 
+                          console.info('userObjectId: ' +userobjectid);
                        }
                        if (result.get("logDateDate")) {
                           var logdatedate = result.get("logDateDate");
@@ -639,12 +638,12 @@ query.limit(650);
                       }
 
 
-
+                       var af2018 = Parse.Object.extend("AuthFail_2018");
 
                        var auth = new af2018();
 
                        if (userobjectid) {
-                         auth.set("userObjectId", userobjectid);
+                         auth.set("userObjectId", {__type: "Pointer", className: "User", objectId:userobjectid});
                        }
                       if (logdatedate) {
                            auth.set("logDateDate",logdatedate);
