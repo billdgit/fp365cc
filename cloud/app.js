@@ -697,7 +697,7 @@ var day2 = new Date(2018,10,20);
 
 //query.greaterThan("logDateDate", day2);
 query.startsWith("logDateDate", "2018");
-query.startsWith("logDateDate", "2017");
+//query.startsWith("logDateDate", "2017");
 
 query.limit(1500);
     query.find({
