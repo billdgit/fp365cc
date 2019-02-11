@@ -613,7 +613,7 @@ Parse.Cloud.job("AuthFailJob", function(request, status) {
 
 var oldQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(oldQuery);
-query.skip(1000);
+//query.skip(1000);
 query.limit(1000);
 
     query.find({
@@ -636,9 +636,9 @@ query.limit(1000);
                       }
 
 
-                       var af2017 = Parse.Object.extend("AuthFail_2017");
+                       var af2018 = Parse.Object.extend("AuthFail_2018");
 
-                       var auth = new af2017();
+                       var auth = new af2018();
 
                        if (userobjectid) {
                          auth.set("userObjectId", userobjectid);
