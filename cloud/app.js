@@ -615,7 +615,7 @@ Parse.Cloud.job("PRPUSH", function(request, status) {
 var pushquery = new Parse.Query(Parse.Installation);
 
 
-    pushquery.find({
+    pushquery.find({useMasterKey:true}{
             success:function(results) {
 
             console.info("total Installtions = "+results.length);
