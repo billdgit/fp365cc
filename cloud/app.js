@@ -612,11 +612,10 @@
 Parse.Cloud.job("PRPUSH", function(request, status) {
 
 var query = Parse.Object.extend("Installation");
-var psuhquery = new Parse.Query(query);
+var pushquery = new Parse.Query(query);
 
-query.limit(1000);
 
-    query.find({
+    pushquery.find({
             success:function(results) {
 
             console.info("total Installtions = "+results.length);
