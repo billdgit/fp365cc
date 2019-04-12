@@ -611,7 +611,7 @@
 
 Parse.Cloud.job("PRPUSH", function(request, status) {
 
-var query = Parse.Object.extend("Installation");
+var query = Parse.Object.extend("_Installation");
 var pushquery = new Parse.Query(query);
 
 
