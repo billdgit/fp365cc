@@ -609,16 +609,18 @@
 // });
 
 
+
 Parse.Cloud.job("PRPUSH", function(request, status) {
 
 
 var pushquery = new Parse.Query(Parse.Installation);
 
+  // {useMasterKey:true}
 
-    pushquery.find({  {useMasterKey:true}
+    pushquery.find({
             success:function(results) {
 
-            console.info("total Installtions = "+results.length);
+            console.info("total Installations = "+results.length);
 
 
                       status.success("Installation query sucess");
