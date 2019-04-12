@@ -608,7 +608,7 @@
 //
 // });
 
-export MASTER_KEY = "A9gyxEloJNvTiImTQAn82cbB6WhUBvMCJzv13dbp";
+
 
 Parse.Cloud.job("PRPUSH", function(request, status) {
 

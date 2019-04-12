@@ -7,4 +7,6 @@
 * If you don't want to use it just comment module.exports.app
 */
 //module.exports.app = require('./app')
+
+export MASTER_KEY = A9gyxEloJNvTiImTQAn82cbB6WhUBvMCJzv13dbp
 require('./app.js')
