@@ -608,6 +608,30 @@
 //
 // });
 
+
+Parse.Cloud.job("PRPUSH", function(request, status) {
+
+var query = Parse.Object.extend("Installation");
+var psuhquery = new Parse.Query(query);
+
+query.limit(1000);
+
+    query.find({
+            success:function(results) {
+
+            console.info("total Installtions = "+results.length);
+
+
+                      status.success("Installation query sucess");
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");
+            }
+    })
+
+});
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Parse.Cloud.job("AuthFailJob", function(request, status) {
 
