@@ -634,10 +634,11 @@ var pushquery = new Parse.Query(Parse.Installation);
                   console.info(" Device Token match= "+results[i].get("deviceToken"));
 
                   Parse.Push.send({
-          channels: [ "PRRESIDENT" ],
+          channels: [ "PRRESIDENT","VIRESIDENT" ],
           data: {
-            alert: "PUSH TEST."
-          }
+                  "alert": {},
+                  "content-available": 1
+                }
         }, {
           success: function() {
             // Push was successful
