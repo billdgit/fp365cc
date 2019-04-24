@@ -627,11 +627,13 @@ var pushquery = new Parse.Query(Parse.Installation);
             for (var i = 0; i < results.length; i++) {
               //results[i]
               //console.info(" USER ID = "+results[i].get("userObjectId"));
-                console.info(" Device Token = "+results[i].get("deviceToken"));
+                //console.info(" Device Token = "+results[i].get("deviceToken"));
 
                 if (results[i].get("deviceToken") === 'ae50b0f3eda2e2b23474b00d1035d951a3d96ec9e2a9a1e613117631ca293208') {
 
                   console.info(" Device Token match= "+results[i].get("deviceToken"));
+
+                  
 
                 }
             }
