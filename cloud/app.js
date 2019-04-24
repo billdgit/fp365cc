@@ -619,6 +619,8 @@ var pushquery = new Parse.Query(Parse.Installation);
 
   // {useMasterKey:true}
 
+ pushquery.equalTo("installationId", '96e53143-900e-4137-8724-c283f4b14d05');
+
     pushquery.find({useMasterKey:true,
             success:function(results) {
 
@@ -629,12 +631,12 @@ var pushquery = new Parse.Query(Parse.Installation);
               //console.info(" USER ID = "+results[i].get("userObjectId"));
                 //console.info(" Device Token = "+results[i].get("deviceToken"));
 
-                if (results[i].get("deviceToken") === 'ae50b0f3eda2e2b23474b00d1035d951a3d96ec9e2a9a1e613117631ca293208') {
+                //if (results[i].get("installationId") === '96e53143-900e-4137-8724-c283f4b14d05') {
 
-                  console.info(" Device Token match= "+results[i].get("deviceToken"));
+                  console.info(" installationId match= "+results[i].get("installationId"));
 
                   Parse.Push.send({
-          channels: [ "PRRESIDENT","VIRESIDENT" ],
+          //channels: [ "PRRESIDENT","VIRESIDENT" ],
           data: {
                   "alert": {},
                   "content-available": 1
@@ -654,7 +656,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
 
 
-                }
+              //  }
             }
 
 
