@@ -624,7 +624,7 @@ var pushquery = new Parse.Query(Parse.Installation);
     pushquery.find({useMasterKey:true,
             success:function(results) {
 
-            //console.info("total Installations = "+results.length);
+            console.info("total Installations with constraint = "+results.length);
 
             for (var i = 0; i < results.length; i++) {
               //results[i]
@@ -637,6 +637,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
                   Parse.Push.send({
           //channels: [ "PRRESIDENT","VIRESIDENT" ],
+           where: pushquery,
           data: {
                   "alert": {},
                   "content-available": 1
