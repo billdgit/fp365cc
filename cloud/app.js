@@ -624,7 +624,9 @@ var pushquery = new Parse.Query(Parse.Installation);
 
             console.info("total Installations = "+results.length);
 
-            console.info(" Installation 0 = "+results);
+            console.info(" USER ID = "+result.get("userObjectId"));
+              console.info(" Device Token = "+result.get("deviceToken"));
+
 
 
 
