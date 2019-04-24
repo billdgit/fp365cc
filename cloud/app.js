@@ -608,6 +608,8 @@
 //
 // });
 
+//pushquery.find({useMasterKey:true,
+//success:function(results) {...
 
 
 Parse.Cloud.job("PRPUSH", function(request, status) {
@@ -617,7 +619,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
   // {useMasterKey:true}
 
-    pushquery.find({
+    pushquery.find({useMasterKey:true,
             success:function(results) {
 
             console.info("total Installations = "+results.length);
