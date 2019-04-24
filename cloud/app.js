@@ -624,7 +624,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
             console.info("total Installations = "+results.length);
 
-            console.info(" Installation 0 = "+results[0];
+            console.info(" Installation 0 = "+results[0]);
 
 
 
