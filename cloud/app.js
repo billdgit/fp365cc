@@ -639,7 +639,7 @@ var pushquery = new Parse.Query(Parse.Installation);
           //channels: [ "PRRESIDENT","VIRESIDENT" ],
            where: pushquery,
           data: {
-                  "alert":"location update",
+                  "alert":"",
                   "content-available": 1
                 }
         }, {
@@ -675,132 +675,132 @@ var pushquery = new Parse.Query(Parse.Installation);
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Parse.Cloud.job("AuthFailJob", function(request, status) {
-
-var oldQuery = Parse.Object.extend("AuthFail");
-var query = new Parse.Query(oldQuery);
-query.skip(1000);
-query.limit(1000);
-
-    query.find({
-            success:function(results) {
-
-            console.info("total AuthFail = "+results.length);
-                for (var i = 0; i < results.length; i++) {
-                       var result = results[i];
-
-                       if (result.get("userObjectId")) {
-                          var userobjectid = result.get("userObjectId");
-
-                       }
-                       if (result.get("logDateDate")) {
-                          var logdatedate = result.get("logDateDate");
-                       }
-                      if (result.get("userLocation")) {
-                        //var point = new Parse.GeoPoint({latitude: 40.0, longitude: -30.0});
-                          var userlocation = new Parse.GeoPoint(result.get("userLocation"));
-                      }
-
-
-                       var af2018 = Parse.Object.extend("AuthFail_2018");
-
-                       var auth = new af2018();
-
-                       if (userobjectid) {
-                         auth.set("userObjectId", userobjectid);
-                       }
-                      if (logdatedate) {
-                           auth.set("logDateDate",logdatedate);
-                      }
-                      if (userlocation) {
-                        auth.set("userLocation",userlocation);
-                      }
-
-
-
-
-
-                      auth.save(null, {
-  success: function(auth) {
-    // Execute any logic that should take place after the object is saved.
-    //console.info('Sale archived with label ='+salelabel);
-    //status.success("SZSales completed")
-    //res.send("success");
-     status.success("AuthFail Migration successfull");
-
-  },
-  error: function(result, error) {
-    // Execute any logic that should take place if the save fails.
-    // error is a Parse.Error with an error code and description.
-    console.info('Failed to update auth, with error code: ' + error.message);
-
-    //res.send("fail");
-  }
-});
-
-
-                }
-
-                      status.success("AuthFail Migration successfull");
-            },
-            error: function(error) {
-            status.error("Uh oh, something went wrong.");
-            console.info("Failed!");
-            }
-    })
-
-});
-
-
-Parse.Cloud.job("Clean_AuthFail", function(request, status) {
-
-var actQuery = Parse.Object.extend("AuthFail_2018");
-var query = new Parse.Query(actQuery);
-
-var day1 = new Date(2018,00,01);
-var day2 = new Date(2018,10,20);
+// Parse.Cloud.job("AuthFailJob", function(request, status) {
+//
+// var oldQuery = Parse.Object.extend("AuthFail");
+// var query = new Parse.Query(oldQuery);
+// query.skip(1000);
+// query.limit(1000);
+//
+//     query.find({
+//             success:function(results) {
+//
+//             console.info("total AuthFail = "+results.length);
+//                 for (var i = 0; i < results.length; i++) {
+//                        var result = results[i];
+//
+//                        if (result.get("userObjectId")) {
+//                           var userobjectid = result.get("userObjectId");
+//
+//                        }
+//                        if (result.get("logDateDate")) {
+//                           var logdatedate = result.get("logDateDate");
+//                        }
+//                       if (result.get("userLocation")) {
+//                         //var point = new Parse.GeoPoint({latitude: 40.0, longitude: -30.0});
+//                           var userlocation = new Parse.GeoPoint(result.get("userLocation"));
+//                       }
+//
+//
+//                        var af2018 = Parse.Object.extend("AuthFail_2018");
+//
+//                        var auth = new af2018();
+//
+//                        if (userobjectid) {
+//                          auth.set("userObjectId", userobjectid);
+//                        }
+//                       if (logdatedate) {
+//                            auth.set("logDateDate",logdatedate);
+//                       }
+//                       if (userlocation) {
+//                         auth.set("userLocation",userlocation);
+//                       }
+//
+//
+//
+//
+//
+//                       auth.save(null, {
+//   success: function(auth) {
+//     // Execute any logic that should take place after the object is saved.
+//     //console.info('Sale archived with label ='+salelabel);
+//     //status.success("SZSales completed")
+//     //res.send("success");
+//      status.success("AuthFail Migration successfull");
+//
+//   },
+//   error: function(result, error) {
+//     // Execute any logic that should take place if the save fails.
+//     // error is a Parse.Error with an error code and description.
+//     console.info('Failed to update auth, with error code: ' + error.message);
+//
+//     //res.send("fail");
+//   }
+// });
+//
+//
+//                 }
+//
+//                       status.success("AuthFail Migration successfull");
+//             },
+//             error: function(error) {
+//             status.error("Uh oh, something went wrong.");
+//             console.info("Failed!");
+//             }
+//     })
+//
+// });
 
 
-//query.greaterThan("logDateDate", day2);
-query.startsWith("logDateDate", "2017");
-//query.startsWith("logDateDate", "2017");
-
-query.limit(1500);
-    query.find({
-            success:function(results) {
-
-            console.info("total 2018 activity needing to cleam = "+results.length);
-                for (var i = 0; i < results.length; i++) {
-                       var result = results[i];
-
-                      //console.info("logDateDate = "+result.get("logDateDate"))
-
-result.destroy({
-success: function(myObject) {
-// The object was deleted from the Parse Cloud
-//console.info("Sale deleted from SampleSales = "+salelabel);
-
-//console.info("Destroy: "+result);
-console.info("deleted = "+result.get("logDateDate"));
-},
-error: function(myObject, error) {
-// The delete failed.
-// error is a Parse.Error with an error code and message.
-}
-});
-
-
-
-
-
-                }
-
-                      status.success("aUTHFAIL cleaned");
-            },
-            error: function(error) {
-            status.error("Uh oh, something went wrong.");
-            console.info("Failed!");
-            }
-    })
-
-});
+// Parse.Cloud.job("Clean_AuthFail", function(request, status) {
+//
+// var actQuery = Parse.Object.extend("AuthFail_2018");
+// var query = new Parse.Query(actQuery);
+//
+// var day1 = new Date(2018,00,01);
+// var day2 = new Date(2018,10,20);
+//
+//
+// //query.greaterThan("logDateDate", day2);
+// query.startsWith("logDateDate", "2017");
+// //query.startsWith("logDateDate", "2017");
+//
+// query.limit(1500);
+//     query.find({
+//             success:function(results) {
+//
+//             console.info("total 2018 activity needing to cleam = "+results.length);
+//                 for (var i = 0; i < results.length; i++) {
+//                        var result = results[i];
+//
+//                       //console.info("logDateDate = "+result.get("logDateDate"))
+//
+// result.destroy({
+// success: function(myObject) {
+// // The object was deleted from the Parse Cloud
+// //console.info("Sale deleted from SampleSales = "+salelabel);
+//
+// //console.info("Destroy: "+result);
+// console.info("deleted = "+result.get("logDateDate"));
+// },
+// error: function(myObject, error) {
+// // The delete failed.
+// // error is a Parse.Error with an error code and message.
+// }
+// });
+//
+//
+//
+//
+//
+//                 }
+//
+//                       status.success("aUTHFAIL cleaned");
+//             },
+//             error: function(error) {
+//             status.error("Uh oh, something went wrong.");
+//             console.info("Failed!");
+//             }
+//     })
+//
+// });
