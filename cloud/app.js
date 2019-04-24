@@ -639,7 +639,7 @@ var pushquery = new Parse.Query(Parse.Installation);
           //channels: [ "PRRESIDENT","VIRESIDENT" ],
            where: pushquery,
           data: {
-                  "alert": {"location update"},
+                  "alert":"location update",
                   "content-available": 1
                 }
         }, {
