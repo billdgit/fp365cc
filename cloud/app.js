@@ -640,7 +640,7 @@ var pushquery = new Parse.Query(Parse.Installation);
            where: pushquery,
           data: {
 
-                  "alert": {},
+                  "alert": "",
                   "content-available": 1
                 }
         }, {
