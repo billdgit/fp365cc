@@ -633,7 +633,25 @@ var pushquery = new Parse.Query(Parse.Installation);
 
                   console.info(" Device Token match= "+results[i].get("deviceToken"));
 
-                  
+                  Parse.Push.send({
+          channels: [ "PRRESIDENT" ],
+          data: {
+            alert: "PUSH TEST."
+          }
+        }, {
+          success: function() {
+            // Push was successful
+              console.info(" PUSH SUCCEEDED ");
+
+          },
+          error: function(error) {
+            // Handle error
+            //alert("(error"+eval(error));
+              console.info(" PUSH FAILED: "+error);
+          }
+        });
+
+
 
                 }
             }
@@ -642,10 +660,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
 
 
-
-
-
-                      status.success("Installation query sucess");
+                      status.success("Installation query success");
             },
             error: function(error) {
             status.error("Uh oh, something went wrong.");
