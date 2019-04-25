@@ -619,12 +619,12 @@ var pushquery = new Parse.Query(Parse.Installation);
 
   // {useMasterKey:true}
 
- pushquery.equalTo("installationId", '96e53143-900e-4137-8724-c283f4b14d05');
+ pushquery.equalTo("appVersion", '2.0.10');
 
     pushquery.find({useMasterKey:true,
             success:function(results) {
 
-            console.info("total Installations with constraint = "+results.length);
+            console.info("total Installations with appVersion constraint = "+results.length);
 
             for (var i = 0; i < results.length; i++) {
               //results[i]
@@ -633,7 +633,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
                 //if (results[i].get("installationId") === '96e53143-900e-4137-8724-c283f4b14d05') {
 
-                  console.info(" installationId match= "+results[i].get("installationId"));
+                  console.info(" appVersion match= "+results[i].get("appVersion"));
 
                   Parse.Push.send({
           //channels: [ "PRRESIDENT","VIRESIDENT" ],
