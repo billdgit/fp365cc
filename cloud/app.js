@@ -619,7 +619,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
   // {useMasterKey:true}
 
- pushquery.equalTo("appVersion", '2.0.10');
+ pushquery.equalTo("appVersion", '2.0.11');
 
     pushquery.find({useMasterKey:true,
             success:function(results) {
