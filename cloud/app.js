@@ -618,8 +618,9 @@ Parse.Cloud.job("PRPUSH", function(request, status) {
 var pushquery = new Parse.Query(Parse.Installation);
 
   // {useMasterKey:true}
-
- pushquery.equalTo("appVersion", '2.0.11');
+//query.greaterThanOrEqualTo("wins", 50);
+  
+ pushquery.greaterThanOrEqualTo("appVersion", '2');
 
     pushquery.find({useMasterKey:true,
             success:function(results) {
