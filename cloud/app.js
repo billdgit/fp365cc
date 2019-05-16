@@ -619,7 +619,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
   // {useMasterKey:true}
 //query.greaterThanOrEqualTo("wins", 50);
-  
+
  pushquery.greaterThanOrEqualTo("appVersion", "2.");
 
     pushquery.find({useMasterKey:true,
@@ -628,6 +628,8 @@ var pushquery = new Parse.Query(Parse.Installation);
             console.info("total Installations with appVersion constraint = "+results.length);
 
             for (var i = 0; i < results.length; i++) {
+
+              var dT = +results[i].get("deviceToken");
               //results[i]
               //console.info(" USER ID = "+results[i].get("userObjectId"));
                 //console.info(" Device Token = "+results[i].get("deviceToken"));
@@ -636,7 +638,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
                   console.info(" appVersion match= "+results[i].get("appVersion"));
 
-              if(!(sent.includes(results[i].get("installationId"))){
+              if(!sent.includes(dT)){
                   Parse.Push.send({
           //channels: [ "PRRESIDENT","VIRESIDENT" ],
            where: pushquery,
@@ -646,7 +648,7 @@ var pushquery = new Parse.Query(Parse.Installation);
         }, {
           success: function() {
             // Push was successful
-            sent.push(results[i].get("installationId");
+            sent.push(dT);
               console.info(" PUSH SUCCEEDED ");
 
           },
@@ -656,8 +658,8 @@ var pushquery = new Parse.Query(Parse.Installation);
               console.info(" PUSH FAILED: "+error);
           }
         });
-              
-             
+
+
             }
 
 
