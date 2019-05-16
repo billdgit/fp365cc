@@ -614,7 +614,7 @@
 
 Parse.Cloud.job("PRPUSH", function(request, status) {
 
-
+var sent = [];
 var pushquery = new Parse.Query(Parse.Installation);
 
   // {useMasterKey:true}
@@ -636,6 +636,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
                   console.info(" appVersion match= "+results[i].get("appVersion"));
 
+              if(!(sent.includes(results[i].get("installationId"))){
                   Parse.Push.send({
           //channels: [ "PRRESIDENT","VIRESIDENT" ],
            where: pushquery,
@@ -645,6 +646,7 @@ var pushquery = new Parse.Query(Parse.Installation);
         }, {
           success: function() {
             // Push was successful
+            sent.push(results[i].get("installationId");
               console.info(" PUSH SUCCEEDED ");
 
           },
@@ -654,10 +656,11 @@ var pushquery = new Parse.Query(Parse.Installation);
               console.info(" PUSH FAILED: "+error);
           }
         });
+              
+             
+            }
 
 
-
-              //  }
             }
 
 
