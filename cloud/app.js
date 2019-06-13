@@ -716,40 +716,53 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
  var USER = Parse.Object.extend("_User");
  var userquery = new Parse.Query(USER);
- userquery.get(userobjectid);
- .then((user) => {
-   // The object was retrieved successfully.
 
-   if(user.get("displayName")){
-    var displayname = user.get("displayName");
-  }
 
-  if(user.get("email")){
-   var email = user.get("email");
- }
+ userquery.limit(1000);
+ userquery.equalTo("objectId",userobjectid);
 
- }, (error) => {
-   // The object was not retrieved successfully.
-   // error is a Parse.Error with an error code and message.
- });
+
+     userquery.first({
+             success:function(result) {
+
+               if(result.get("displayName")){
+                   var displayname = result.get("displayName");
+                 }
+
+                 if(result.get("email")){
+                  var email = result.get("email");
+                }
+
+             //console.info("total old sales needing to ARCHIVE = "+results.length);
+
+
+                       status.success("getuser successfull");
+
+
+                       var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
+                       var DOMAIN = 'footprints365.com';
+                       var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+
+                       const data = {
+                         from: email,
+                         to: 'failure@footprints365.com',
+                         subject: displayname+' Authentication Failure',
+                         text: 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date;
+                       };
+
+                       mailgun.messages().send(data, (error, body) => {
+                         console.log(body);
+                       });
+             },
+             error: function(error) {
+             status.error("Uh oh, something went wrong.");
+             console.info("Failed!");
+             }
+     });
 
 
 //console.info("after save of user called  add sib email = "+email);
 
-var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
-var DOMAIN = 'footprints365.com';
-var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
-
-const data = {
-  from: email,
-  to: 'failure@footprints365.com',
-  subject: displayname+' Authentication Failure',
-  text: 'User '+displayname+' has failed authentiction with '+type+' at '+location;
-};
-
-mailgun.messages().send(data, (error, body) => {
-  console.log(body);
-});
 
 
 
