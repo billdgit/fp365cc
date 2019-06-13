@@ -679,6 +679,170 @@ var pushquery = new Parse.Query(Parse.Installation);
 
 });
 
+///////////////////////////////////////////////////////////////////////////////////////
+   //// Function to locate and translate after any sale is saved ////
+
+///////////////////////////Mailgun API /////////////////////////////////////
+Parse.Cloud.afterSave("AuthFail", function(request) {
+
+
+// if (request.object.get("newsletter")) {
+//
+//     console.info("after save of user called with newsletter true do nothing");
+// }
+// else
+// {
+  //if (request.object.get("userObjectId") || request.object.get("logDateDate") || request.object.get("location") || request.object.get("type")) {
+
+
+  if (request.object.get("userObjectId")) {
+    var userobjectid = request.object.get("userObjectId");
+  }
+   if (request.object.get("logDateDate")) {
+    var date = request.object.get("logDateDate");
+  }
+   if(request.object.get("location")){
+    var location = request.object.get("location");
+  }else{
+    var location = 'none avaialable';
+  }
+  if(request.object.get("type")){
+   var type = request.object.get("type");
+ }else{
+   var type = 'not avaialable';
+ }
+
+
+
+ var USER = Parse.Object.extend("_User");
+ var userquery = new Parse.Query(USER);
+ userquery.get(userobjectid);
+ .then((user) => {
+   // The object was retrieved successfully.
+
+   if(user.get("displayName")){
+    var displayname = user.get("displayName");
+  }
+
+  if(user.get("email")){
+   var email = user.get("email");
+ }
+
+ }, (error) => {
+   // The object was not retrieved successfully.
+   // error is a Parse.Error with an error code and message.
+ });
+
+
+//console.info("after save of user called  add sib email = "+email);
+
+var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
+var DOMAIN = 'footprints365.com';
+var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+
+const data = {
+  from: email,
+  to: 'failure@footprints365.com',
+  subject: displayname+' Authentication Failure',
+  text: 'User '+displayname+' has failed authentiction with '+type+' at '+location;
+};
+
+mailgun.messages().send(data, (error, body) => {
+  console.log(body);
+});
+
+
+
+
+
+});
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
+// var datacenter = "us13";
+//
+// //bc04ffb869ce1d8c226c7365a5d34359-us13  footprints365 MAILCHIMP API Key
+// var MAILCHIMP_URL = "https://randomUser:bc04ffb869ce1d8c226c7365a5d34359-us13" + datacenter + ".api.mailchimp.com/3.0/";
+// //var MAILCHIMP_URL = "https://randomUser:5a4ffefdb48b1c9c23d91c7069e681c5-us8@" + datacenter + ".api.mailchimp.com/3.0/";
+// //var MAILCHIMP_LIST_NEWSLETTER_ID = "69093aaced"; //7c5c46538a //69093aaced Newsletter app
+//
+// Parse.Cloud.define("SubscribeUserToMailingList", function(request, response) {
+//
+//
+//   // if (!request.params ||
+//   //       !request.params.email){
+//   //   response.error("Must supply email address, firstname and lastname to Mailchimp signup");
+//   //   return;
+//   // }
+//
+//   // var email = request.params.email;
+//   // var firstName = request.params.firstname;
+//   // var lastName = request.params.lastname;
+//
+//   // this converts the email string into an MD5 hash.
+//   // this is Required if you want to use a "PUT" which allows add/update of an entry, compared to the POST that allows only adding a new subscriber.
+//
+//   console.info('email passed to function from params = ' + request.params.email);
+//
+//   var email = request.params.email;
+//
+//   var emailHash = md5(email);
+//
+//   var mailchimpData = {
+//     'email_address': email,
+//     'status': "subscribed"
+//     //'interests':{'app':true}
+//   };
+//
+//   var url = MAILCHIMP_URL + "lists/" + MAILCHIMP_LIST_NEWSLETTER_ID + "/members/" + emailHash;
+//
+//   // using a "PUT" allows you to add/update an entry.
+//   Parse.Cloud.httpRequest({
+//     method: 'PUT',
+//     url: url,
+//     body: JSON.stringify(mailchimpData),
+//     success: function(httpResponse) {
+//       //console.info(httpResponse.text);
+//   console.info('Request success response status ' + httpResponse.status);
+//       response.success("Successfully subscribed");
+//
+//       var USER = Parse.Object.extend("_User");
+//       var query = new Parse.Query(USER);
+//       query.equalTo("user_email",email);
+//       query.limit(1000);
+//       query.first({
+//         success: function(result) {
+//
+//          //console.info("items returned for current USER "+results.length);
+//
+//          result.set("newsletter",true);
+//
+//           result.save(null, {useMasterKey: true});
+//
+//         }
+//         });
+//
+//
+//
+//
+//     },
+//     error: function(httpResponse) {
+//       console.info('Request failed with response code ' + httpResponse.status);
+//       console.info('Request failed with response text ' +httpResponse.text);
+//
+//       response.error('Mailchimp subscribe failed with response code ' + httpResponse.status);
+//     }
+//   });
+// });
+/////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Parse.Cloud.job("AuthFailJob", function(request, status) {
 //
