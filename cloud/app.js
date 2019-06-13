@@ -736,8 +736,10 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
              //console.info("total old sales needing to ARCHIVE = "+results.length);
 
 
+
                        status.success("getuser successfull");
 
+                       var text = 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date+'';
 
                        var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
                        var DOMAIN = 'footprints365.com';
@@ -747,7 +749,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
                          from: email,
                          to: 'failure@footprints365.com',
                          subject: displayname+' Authentication Failure',
-                         text: 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date+';
+                         text: text
                        };
 
                        mailgun.messages().send(data, (error, body) => {
