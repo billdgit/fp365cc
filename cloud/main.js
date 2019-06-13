@@ -10,3 +10,5 @@
 
 //export MASTER_KEY = A9gyxEloJNvTiImTQAn82cbB6WhUBvMCJzv13dbp
 require('./app.js')
+require('mailgun-js')
+module.exports.app = require('./app')
