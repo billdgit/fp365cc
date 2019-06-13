@@ -747,7 +747,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
                          from: email,
                          to: 'failure@footprints365.com',
                          subject: displayname+' Authentication Failure',
-                         text: 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date;
+                         text: 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date';
                        };
 
                        mailgun.messages().send(data, (error, body) => {
