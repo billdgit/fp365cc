@@ -704,6 +704,21 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
  }
 
 
+ var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
+ var DOMAIN = 'footprints365.com';
+ var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+
+ const data = {
+   from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
+   to: 'failure@footprints365.com',
+   subject: ' Authentication Failure',
+   text: 'testing'
+ };
+
+ mailgun.messages().send(data, (error, body) => {
+   console.info(body);
+ });
+
 
  var uq = Parse.Object.extend("_User");
  var userquery = new Parse.Query(uq);
@@ -732,20 +747,20 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
                        //var text = 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date+'';
 
-                       var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
-                       var DOMAIN = 'footprints365.com';
-                       var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
-
-                       const data = {
-                         from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
-                         to: 'failure@footprints365.com',
-                         subject: displayname+' Authentication Failure',
-                         text: 'testing'
-                       };
-
-                       mailgun.messages().send(data, (error, body) => {
-                         console.info(body);
-                       });
+                       // var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
+                       // var DOMAIN = 'footprints365.com';
+                       // var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+                       //
+                       // const data = {
+                       //   from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
+                       //   to: 'failure@footprints365.com',
+                       //   subject: ' Authentication Failure',
+                       //   text: 'testing'
+                       // };
+                       //
+                       // mailgun.messages().send(data, (error, body) => {
+                       //   console.info(body);
+                       // });
              },
              error: function(error) {
              status.error("Uh oh, something went wrong.");
