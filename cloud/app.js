@@ -708,20 +708,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 console.info('userobjectid with id = '+userobjectid);
 
 
- var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
- var DOMAIN = 'sandboxcc71126d1a57488d9666c319825317a1.mailgun.org';
- var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
 
- const data = {
-   from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
-   to: 'failure@footprints365.com',
-   subject: userobjectid+'Authentication Failure',
-   text: userobjectid+ ' failed authentication at '+location+' on '+date+' cause was '+type
- };
-
- mailgun.messages().send(data, (error, body) => {
-   console.info('body = '+body);
- });
 
 
  //var uq = Parse.Object.extend("_User");
@@ -734,17 +721,17 @@ console.info('userobjectid with id = '+userobjectid);
 
 //console.info('got this far');
 
-     userquery.find({
-             success:function(results) {
+     userquery.first({
+             success:function(result) {
 
-               console.info('results retuend = '+results.length);
+               console.info('result retuend = '+result);
 
-               for (var i = 0; i < results.length; i++) {
-                var result = results[i]
+               // for (var i = 0; i < results.length; i++) {
+               //  var result = results[i]
 
                  if(result.get("displayName")){
                      var displayname = result.get("displayName");
-                      console.info("user = "+displayname);
+                      console.info("user displayname = "+displayname);
                    }
 
                    if(result.get("username")){
@@ -752,20 +739,29 @@ console.info('userobjectid with id = '+userobjectid);
                     console.info("email from username = "+email);
                   }
 
-                  if(result.get("email")){
-                   var email = result.get("email");
-                   console.info("email from email = "+email);
-                 }
+
+               //}
 
 
+               var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
+               var DOMAIN = 'sandboxcc71126d1a57488d9666c319825317a1.mailgun.org';
+               var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
 
+               const data = {
+                 from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
+                 to: 'failure@footprints365.com',
+                 subject: displayname+' Authentication Failure',
+                 text: displayname+' failed authentication at '+location+' with '+type+' on '+date
+               };
 
-               }
-
-
+               mailgun.messages().send(data, (error, body) => {
+                 //console.info('body = '+body);
+               });
 
 
                        status.success("getuser successfull");
+
+
 
                        //var text = 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date+'';
 
