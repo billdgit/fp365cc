@@ -703,7 +703,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
    var type = 'not avaialable';
  }
 
-
+var userid = userobjectid.objectId;
 
 
  var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
@@ -728,9 +728,9 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
  userquery.limit(200);
 
- userquery.equalTo("objectId",userobjectid);
+ userquery.equalTo("objectId",userid);
 
-console.info('got this far');
+//console.info('got this far');
 
      userquery.find({
              success:function(results) {
