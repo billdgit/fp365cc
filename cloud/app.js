@@ -625,7 +625,7 @@ var pushquery = new Parse.Query(Parse.Installation);
     pushquery.find({useMasterKey:true,
             success:function(results) {
 
-            console.info("total Installations with appVersion constraint = "+results.length);
+            console.info("total Installations for push = "+results.length);
 
             for (var i = 0; i < results.length; i++) {
 
@@ -686,15 +686,6 @@ var pushquery = new Parse.Query(Parse.Installation);
 Parse.Cloud.afterSave("AuthFail", function(request) {
 
 
-// if (request.object.get("newsletter")) {
-//
-//     console.info("after save of user called with newsletter true do nothing");
-// }
-// else
-// {
-  //if (request.object.get("userObjectId") || request.object.get("logDateDate") || request.object.get("location") || request.object.get("type")) {
-
-
   if (request.object.get("userObjectId")) {
     var userobjectid = request.object.get("userObjectId");
   }
@@ -714,8 +705,8 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
 
 
- var USER = Parse.Object.extend("_User");
- var userquery = new Parse.Query(USER);
+ var uq = Parse.Object.extend("_User");
+ var userquery = new Parse.Query(uq);
 
 
  userquery.limit(1000);
@@ -733,13 +724,13 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
                   var email = result.get("email");
                 }
 
-             //console.info("total old sales needing to ARCHIVE = "+results.length);
+             console.info("user = "+displayname);
 
 
 
                        status.success("getuser successfull");
 
-                       var text = 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date+'';
+                       //var text = 'User '+displayname+' has failed authentiction with '+type+' at '+location+' on '+date+'';
 
                        var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
                        var DOMAIN = 'footprints365.com';
@@ -749,7 +740,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
                          from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
                          to: 'failure@footprints365.com',
                          subject: displayname+' Authentication Failure',
-                         text: text
+                         text: 'testing'
                        };
 
                        mailgun.messages().send(data, (error, body) => {
@@ -761,13 +752,6 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
              console.info("Failed!");
              }
      });
-
-
-//console.info("after save of user called  add sib email = "+email);
-
-
-
-
 
 
 });
