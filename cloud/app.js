@@ -711,8 +711,8 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
  const data = {
    from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
    to: 'failure@footprints365.com',
-   subject: 'Authentication Failure',
-   text: userobjectid+ ' failed authentication at '+location+' on '+date+' with '+type+' as cause'
+   subject: userobjectid+'Authentication Failure',
+   text: userobjectid+ ' failed authentication at '+location+' on '+date+' cause was '+type
  };
 
  mailgun.messages().send(data, (error, body) => {
@@ -720,13 +720,15 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
  });
 
 
- var uq = Parse.Object.extend("_User");
+ var uq = Parse.Object.extend("User");
  var userquery = new Parse.Query(uq);
 
 
  userquery.limit(200);
+
  userquery.equalTo("objectId",userobjectid);
 
+console.info('got this far');
 
      userquery.first({
              success:function(result) {
@@ -740,6 +742,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
                 }
 
              console.info("user = "+displayname);
+             console.info("email = "+email);
 
 
 
