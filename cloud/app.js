@@ -705,7 +705,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
 
  var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
- var DOMAIN = 'https://app.mailgun.com/app/sending/domains/sandboxcc71126d1a57488d9666c319825317a1.mailgun.org';
+ var DOMAIN = 'sandboxcc71126d1a57488d9666c319825317a1.mailgun.org';
  var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
 
  const data = {
