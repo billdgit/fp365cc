@@ -711,12 +711,12 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
  const data = {
    from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
    to: 'failure@footprints365.com',
-   subject: ' Authentication Failure',
+   subject: location+' Authentication Failure',
    text: 'testing'
  };
 
  mailgun.messages().send(data, (error, body) => {
-   console.info(body);
+   console.info('body = '+body);
  });
 
 
