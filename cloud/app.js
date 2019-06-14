@@ -712,7 +712,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
    from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
    to: 'failure@footprints365.com',
    subject: 'Authentication Failure',
-   text: userobjectid+ ' failed authentication at '+location+' on '+logdatedate+' with '+type+' as cause'
+   text: userobjectid+ ' failed authentication at '+location+' on '+date+' with '+type+' as cause'
  };
 
  mailgun.messages().send(data, (error, body) => {
