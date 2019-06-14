@@ -730,19 +730,25 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
 console.info('got this far');
 
-     userquery.first({
-             success:function(result) {
+     userquery.find({
+             success:function(results) {
 
-               if(result.get("displayName")){
-                   var displayname = result.get("displayName");
-                 }
+               for (var i = 0; i < results.length; i++) {
+                var result = results[i]
 
-                 if(result.get("email")){
-                  var email = result.get("email");
-                }
+                 if(result.get("displayName")){
+                     var displayname = result.get("displayName");
+                   }
 
-             console.info("user = "+displayname);
-             console.info("email = "+email);
+                   if(result.get("email")){
+                    var email = result.get("email");
+                  }
+
+               console.info("user = "+displayname);
+               console.info("email = "+email);
+
+               }
+
 
 
 
