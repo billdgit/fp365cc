@@ -704,6 +704,8 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
  }
 
 
+
+
  var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
  var DOMAIN = 'sandboxcc71126d1a57488d9666c319825317a1.mailgun.org';
  var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
@@ -720,8 +722,8 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
  });
 
 
- var uq = Parse.Object.extend("_User");
- var userquery = new Parse.Query(uq);
+ //var uq = Parse.Object.extend("_User");
+ var userquery = new Parse.Query(Parse.User);
 
 
  userquery.limit(200);
