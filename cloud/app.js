@@ -705,7 +705,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
 //var userid = userobjectid.objectId;
 
-console.info('userobjectid json = '+JSON.stringify(userobjectid));
+console.info('userobjectid from json = '+userobjectid.objectId);
 
 
  var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
