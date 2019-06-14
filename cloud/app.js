@@ -720,7 +720,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
  });
 
 
- var uq = Parse.Object.extend("User");
+ var uq = Parse.Object.extend("_User");
  var userquery = new Parse.Query(uq);
 
 
@@ -732,6 +732,8 @@ console.info('got this far');
 
      userquery.find({
              success:function(results) {
+
+               console.info('results retuend = '+results.length);
 
                for (var i = 0; i < results.length; i++) {
                 var result = results[i]
