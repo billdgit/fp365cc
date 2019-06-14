@@ -687,7 +687,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
 
   if (request.object.get("userObjectId")) {
-    var userobjectid = request.object.get("userObjectId");
+    var userobjectid = request.object.get("userObjectId").id;
   }
    if (request.object.get("logDateDate")) {
     var date = request.object.get("logDateDate");
@@ -703,9 +703,9 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
    var type = 'not avaialable';
  }
 
-var userid = userobjectid.get("objectId");
 
-console.info('userobjectid from json = '+userobjectid.get("objectId"));
+
+console.info('userobjectid with id = '+userobjectid);
 
 
  var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
@@ -730,7 +730,7 @@ console.info('userobjectid from json = '+userobjectid.get("objectId"));
 
  userquery.limit(200);
 
- userquery.equalTo("objectId",userid);
+ userquery.equalTo("objectId",userobjectid);
 
 //console.info('got this far');
 
