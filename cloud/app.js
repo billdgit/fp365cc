@@ -746,7 +746,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
                        var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
 
                        const data = {
-                         from: email,
+                         from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
                          to: 'failure@footprints365.com',
                          subject: displayname+' Authentication Failure',
                          text: text
