@@ -746,12 +746,12 @@ console.info('userobjectid with id = '+userobjectid);
                      var displayname = result.get("displayName");
                    }
 
-                   if(result.get("email")){
-                    var email = result.get("email");
+                   if(result.get("username")){
+                    var email = result.get("username");
                   }
 
                console.info("user = "+displayname);
-               console.info("email = "+email);
+               console.info("email = "+username);
 
                }
 
