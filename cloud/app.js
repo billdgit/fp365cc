@@ -753,7 +753,7 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
                        };
 
                        mailgun.messages().send(data, (error, body) => {
-                         console.log(body);
+                         console.info(body);
                        });
              },
              error: function(error) {
