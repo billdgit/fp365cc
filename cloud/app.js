@@ -744,14 +744,21 @@ console.info('userobjectid with id = '+userobjectid);
 
                  if(result.get("displayName")){
                      var displayname = result.get("displayName");
+                      console.info("user = "+displayname);
                    }
 
                    if(result.get("username")){
                     var email = result.get("username");
+                    console.info("email from username = "+email);
                   }
 
-               console.info("user = "+displayname);
-               console.info("email = "+username);
+                  if(result.get("email")){
+                   var email = result.get("email");
+                   console.info("email from email = "+email);
+                 }
+
+
+
 
                }
 
