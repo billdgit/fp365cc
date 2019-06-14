@@ -705,6 +705,8 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
 
 var userid = userobjectid.objectId;
 
+console.info('userid from userobjectid = '+userid);
+
 
  var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
  var DOMAIN = 'sandboxcc71126d1a57488d9666c319825317a1.mailgun.org';
