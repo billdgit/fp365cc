@@ -744,11 +744,11 @@ console.info('userobjectid with id = '+userobjectid);
 
 
                var API_KEY = '751b6721f3770b3847b7dab30186df2f-16ffd509-dd7aab75';
-               var DOMAIN = 'sandboxcc71126d1a57488d9666c319825317a1.mailgun.org';
+               var DOMAIN = 'footprints365.com';
                var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
 
                const data = {
-                 from: 'postmaster@sandboxcc71126d1a57488d9666c319825317a1.mailgun.org',
+                 from: 'postmaster@footprints365.com',
                  to: 'failure@footprints365.com',
                  subject: displayname+' Authentication Failure',
                  text: displayname+' failed authentication at '+location+' with '+type+' on '+date
