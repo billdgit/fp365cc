@@ -695,12 +695,12 @@ Parse.Cloud.afterSave("AuthFail", function(request) {
    if(request.object.get("location")){
     var location = request.object.get("location");
   }else{
-    var location = 'none avaialable';
+    var location = 'none available';
   }
   if(request.object.get("type")){
    var type = request.object.get("type");
  }else{
-   var type = 'not avaialable';
+   var type = 'not available';
  }
 
 
@@ -712,6 +712,10 @@ console.info('userobjectid with id = '+userobjectid);
 
 
  //var uq = Parse.Object.extend("_User");
+
+ if (type === "biometric-changed") {
+
+
  var userquery = new Parse.Query(Parse.User);
 
 
@@ -769,6 +773,7 @@ console.info('userobjectid with id = '+userobjectid);
      });
 
 
+}
 });
 
 
