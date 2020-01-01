@@ -263,7 +263,7 @@ query.limit(1000);
     //console.info('Activity archived with label');
     //status.success("SZSales completed")
     //res.send("success");
-     //status.success("Score Migration successfull");
+    status.success("Score Migration successfull");
 
   },
   error: function(result, error) {
