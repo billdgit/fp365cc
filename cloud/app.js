@@ -159,69 +159,69 @@
 //
 // });
 
-Parse.Cloud.job("Migrate_Documents", function(request, status) {
-
-var docsQuery = Parse.Object.extend("Document");
-var query = new Parse.Query(docsQuery);
-
-query.limit(1000);
-
-    query.find({
-            success:function(results) {
-
-            console.info("total old documents needing to ARCHIVE = "+results.length);
-                for (var i = 0; i < results.length; i++) {
-                       var result = results[i];
-
-                       var userobjectid = result.get("userObjectId");
-                      var folder = result.get("folder");
-                      var filename = result.get("fileName");
-
-                      var file = result.get("file");
-
-
-                       var Docs2019 = Parse.Object.extend("Document_2019");
-
-                       var Docs = new Docs2019();
-
-                       Docs.set("userObjectId",userobjectid);
-                       Docs.set("folder",folder);
-                       Docs.set("fileName",filename);
-                       Docs.set("file",file);
-
-
-
-
-                      Docs.save(null, {
-  success: function(Docs) {
-    // Execute any logic that should take place after the object is saved.
-    //console.info('Sale archived with label ='+salelabel);
-    //status.success("SZSales completed")
-    //res.send("success");
-     status.success("Docs Migration successfull");
-
-  },
-  error: function(result, error) {
-    // Execute any logic that should take place if the save fails.
-    // error is a Parse.Error with an error code and description.
-    console.info('Failed to update sale, with error code: ' + error.message);
-
-    //res.send("fail");
-  }
-});
-
-
-                }
-
-                      status.success("Documents Migration successfull");
-            },
-            error: function(error) {
-            status.error("Uh oh, something went wrong.");
-            console.info("Failed!");
-            }
-    })
-
-});
+// Parse.Cloud.job("Migrate_Documents", function(request, status) {
+//
+// var docsQuery = Parse.Object.extend("Document");
+// var query = new Parse.Query(docsQuery);
+//
+// query.limit(1000);
+//
+//     query.find({
+//             success:function(results) {
+//
+//             console.info("total old documents needing to ARCHIVE = "+results.length);
+//                 for (var i = 0; i < results.length; i++) {
+//                        var result = results[i];
+//
+//                        var userobjectid = result.get("userObjectId");
+//                       var folder = result.get("folder");
+//                       var filename = result.get("fileName");
+//
+//                       var file = result.get("file");
+//
+//
+//                        var Docs2019 = Parse.Object.extend("Document_2019");
+//
+//                        var Docs = new Docs2019();
+//
+//                        Docs.set("userObjectId",userobjectid);
+//                        Docs.set("folder",folder);
+//                        Docs.set("fileName",filename);
+//                        Docs.set("file",file);
+//
+//
+//
+//
+//                       Docs.save(null, {
+//   success: function(Docs) {
+//     // Execute any logic that should take place after the object is saved.
+//     //console.info('Sale archived with label ='+salelabel);
+//     //status.success("SZSales completed")
+//     //res.send("success");
+//      status.success("Docs Migration successfull");
+//
+//   },
+//   error: function(result, error) {
+//     // Execute any logic that should take place if the save fails.
+//     // error is a Parse.Error with an error code and description.
+//     console.info('Failed to update sale, with error code: ' + error.message);
+//
+//     //res.send("fail");
+//   }
+// });
+//
+//
+//                 }
+//
+//                       status.success("Documents Migration successfull");
+//             },
+//             error: function(error) {
+//             status.error("Uh oh, something went wrong.");
+//             console.info("Failed!");
+//             }
+//     })
+//
+// });
 //
 // Parse.Cloud.job("Migrate_Activity", function(request, status) {
 //
@@ -298,67 +298,69 @@ query.limit(1000);
 //
 // });
 //
-// Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
-//
-//
-//
-// var actQuery = Parse.Object.extend("AuthFail");
-// var query = new Parse.Query(actQuery);
-//
-// query.limit(1000);
-// //query.skip(1000);
-//
-//
-// //query.descending("logDateDate");
-//
-//     query.find({
-//             success:function(results) {
-//
-//             console.info("total old AuthFails needing to ARCHIVE = "+results.length);
-//
-//                 for (var i = 0; i < results.length; i++) {
-//                        var result = results[i];
-//
-//                        var userobjectid = result.get("userObjectId");
-//                        var logdatedate = result.get("logDateDate");
-//                         var userlocation = result.get("userLocation");
-//
-//
-//                        var ActOrig = Parse.Object.extend("AuthFail_2019");
-//                        var Act = new ActOrig();
-//
-//                        Act.set("userObjectId",userobjectid);
-//                        Act.set("logDateDate",logdatedate);
-//                        Act.set("userLocation",userLocation);
-//
-//
-//                       Act.save(null, {
-//   success: function(Act) {
-//     // Execute any logic that should take place after the object is saved.
-//     console.info('Activity archived with label');
-//     //status.success("SZSales completed")
-//     //res.send("success");
-//      //status.success("Score Migration successfull");
-//
-//   },
-//   error: function(result, error) {
-//     // Execute any logic that should take place if the save fails.
-//     // error is a Parse.Error with an error code and description.
-//     console.info('Failed to update Activity, with error code: ' + error.message);
-//
-//     //res.send("fail");
-//   }
-// });
-//
-//
-//                 }
-//
-//                       status.success("AuthFail Migration successfull");
-//             },
-//             error: function(error) {
-//             status.error("Uh oh, something went wrong.");
-//             console.info("Failed!");
-//             }
-//     })
-//
-// });
+Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
+
+
+
+var actQuery = Parse.Object.extend("AuthFail");
+var query = new Parse.Query(actQuery);
+
+query.limit(1000);
+//query.skip(1000);
+
+
+//query.descending("logDateDate");
+
+    query.find({
+            success:function(results) {
+
+            console.info("total old AuthFails needing to ARCHIVE = "+results.length);
+
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+
+                       var userobjectid = result.get("userObjectId");
+                       var logdatedate = result.get("logDateDate");
+                        var type = result.get("type");
+                        var location = result.get("location");
+
+
+                       var ActOrig = Parse.Object.extend("AuthFail_2019");
+                       var Act = new ActOrig();
+
+                       Act.set("userObjectId",userobjectid);
+                       Act.set("logDateDate",logdatedate);
+                       Act.set("location",location);
+                       Act.set("type",type);
+
+
+                      Act.save(null, {
+  success: function(Act) {
+    // Execute any logic that should take place after the object is saved.
+    console.info('Activity archived with label');
+    //status.success("SZSales completed")
+    //res.send("success");
+     //status.success("Score Migration successfull");
+
+  },
+  error: function(result, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and description.
+    console.info('Failed to update Activity, with error code: ' + error.message);
+
+    //res.send("fail");
+  }
+});
+
+
+                }
+
+                      status.success("AuthFail Migration successfull");
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");
+            }
+    })
+
+});
