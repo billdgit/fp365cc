@@ -239,9 +239,7 @@ query.limit(1000);
 
                        var userobjectid = result.get("userObjectId");
                       var logdatedate = result.get("logDateDate");
-                      var place = [];
                       var place = result.get("place");
-
                       var logdate = result.get("logDate");
                       var type = result.get("type");
 
@@ -253,8 +251,6 @@ query.limit(1000);
                        Act.set("userObjectId",userobjectid);
                        Act.set("logDateDate",logdatedate);
                        Act.set("place",place);
-
-
                        Act.set("logDate",logdate);
                        Act.set("type",type);
 
