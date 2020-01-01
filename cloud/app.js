@@ -234,10 +234,11 @@ query.limit(1000);
             success:function(results) {
 
             console.info("total old activity needing to ARCHIVE = "+results.length);
+
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
-                       var userobjectid = result.get("userObjectId");
+                      var userobjectid = result.get("userObjectId");
                       var logdatedate = result.get("logDateDate");
                       var place = result.get("place");
                       var logdate = result.get("logDate");
@@ -248,11 +249,26 @@ query.limit(1000);
 
                        var Act = new Act2019();
 
-                       Act.set("userObjectId",userobjectid);
-                       Act.set("logDateDate",logdatedate);
-                       Act.set("place",place);
-                       Act.set("logDate",logdate);
-                       Act.set("type",type);
+                       if (userobjectid) {
+                            Act.set("userObjectId",userobjectid);
+                       }
+                       if (logdatedate) {
+                          Act.set("logDateDate",logdatedate);
+
+                       }
+                       if (place) {
+                          Act.set("place",place);
+                       }
+
+                       if (logdate) {
+                          Act.set("logDate",logdate);
+                       }
+
+
+                      if (type) {
+                        Act.set("type",type);
+                      }
+
 
 
 
@@ -263,7 +279,7 @@ query.limit(1000);
     //console.info('Activity archived with label');
     //status.success("SZSales completed")
     //res.send("success");
-    status.success("Score Migration successfull");
+    //status.success("Score Migration successfull");
 
   },
   error: function(result, error) {
