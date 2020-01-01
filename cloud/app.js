@@ -86,119 +86,55 @@
 //
 // });
 
-Parse.Cloud.job("Migrate_Hours", function(request, status) {
-
-var hoursQuery = Parse.Object.extend("Hours");
-var query = new Parse.Query(hoursQuery);
-
-query.limit(1000);
-
-    query.find({
-            success:function(results) {
-
-            console.info("total old hours needing to ARCHIVE = "+results.length);
-                for (var i = 0; i < results.length; i++) {
-                       var result = results[i];
-
-                      var logdatedate = result.get("logDateDate");
-                      var jobnotes = result.get("jobNotes");
-                      var jobname = result.get("jobName");
-                      var jobtotal = result.get("jobTotal");
-
-                      var jobhours = result.get("jobHours");
-                      var joblocation = result.get("jobLocation");
-                      var jobrate = result.get("jobRate");
-                      var userobjectid = result.get("userObjectId");
-
-
-                       var Hours2019 = Parse.Object.extend("Hours_2019");
-
-                       var Hours = new Hours2019();
-
-                       Hours.set("logDateDate",logdatedate);
-                       Hours.set("jobNotes",jobnotes);
-                       Hours.set("jobName",jobname);
-                       Hours.set("jobHours",jobhours);
-                       Hours.set("jobTotal",jobtotal);
-                       Hours.set("jobRate",jobrate);
-                       Hours.set("jobLocation",joblocation);
-
-                       Hours.set("userObjectId",userobjectid);
-
-
-
-
-                      Hours.save(null, {
-  success: function(Hours) {
-    // Execute any logic that should take place after the object is saved.
-    //console.info('Sale archived with label ='+salelabel);
-    //status.success("SZSales completed")
-    //res.send("success");
-     status.success("Score Migration successfull");
-
-  },
-  error: function(result, error) {
-    // Execute any logic that should take place if the save fails.
-    // error is a Parse.Error with an error code and description.
-    console.info('Failed to update sale, with error code: ' + error.message);
-
-    //res.send("fail");
-  }
-});
-
-
-                }
-
-                      status.success("Hours Migration successfull");
-            },
-            error: function(error) {
-            status.error("Uh oh, something went wrong.");
-            console.info("Failed!");
-            }
-    })
-
-});
-
-// Parse.Cloud.job("Migrate_Documents", function(request, status) {
+// Parse.Cloud.job("Migrate_Hours", function(request, status) {
 //
-// var docsQuery = Parse.Object.extend("Document");
-// var query = new Parse.Query(docsQuery);
+// var hoursQuery = Parse.Object.extend("Hours");
+// var query = new Parse.Query(hoursQuery);
 //
 // query.limit(1000);
 //
 //     query.find({
 //             success:function(results) {
 //
-//             console.info("total old documents needing to ARCHIVE = "+results.length);
+//             console.info("total old hours needing to ARCHIVE = "+results.length);
 //                 for (var i = 0; i < results.length; i++) {
 //                        var result = results[i];
 //
-//                        var userobjectid = result.get("userObjectId");
-//                       var folder = result.get("folder");
-//                       var filename = result.get("fileName");
+//                       var logdatedate = result.get("logDateDate");
+//                       var jobnotes = result.get("jobNotes");
+//                       var jobname = result.get("jobName");
+//                       var jobtotal = result.get("jobTotal");
 //
-//                       var file = result.get("file");
-//
-//
-//                        var Docs2019 = Parse.Object.extend("Document_2019");
-//
-//                        var Docs = new Docs2019();
-//
-//                        Docs.set("userObjectId",userobjectid);
-//                        Docs.set("folder",folder);
-//                        Docs.set("fileName",filename);
-//                        Docs.set("file",file);
+//                       var jobhours = result.get("jobHours");
+//                       var joblocation = result.get("jobLocation");
+//                       var jobrate = result.get("jobRate");
+//                       var userobjectid = result.get("userObjectId");
 //
 //
+//                        var Hours2019 = Parse.Object.extend("Hours_2019");
+//
+//                        var Hours = new Hours2019();
+//
+//                        Hours.set("logDateDate",logdatedate);
+//                        Hours.set("jobNotes",jobnotes);
+//                        Hours.set("jobName",jobname);
+//                        Hours.set("jobHours",jobhours);
+//                        Hours.set("jobTotal",jobtotal);
+//                        Hours.set("jobRate",jobrate);
+//                        Hours.set("jobLocation",joblocation);
+//
+//                        Hours.set("userObjectId",userobjectid);
 //
 //
-//                       Docs.save(null, {
-//   success: function(Docs) {
+//
+//
+//                       Hours.save(null, {
+//   success: function(Hours) {
 //     // Execute any logic that should take place after the object is saved.
 //     //console.info('Sale archived with label ='+salelabel);
 //     //status.success("SZSales completed")
 //     //res.send("success");
-//      status.success("Docs Migration successfull");
+//      status.success("Score Migration successfull");
 //
 //   },
 //   error: function(result, error) {
@@ -213,7 +149,7 @@ query.limit(1000);
 //
 //                 }
 //
-//                       status.success("Documents Migration successfull");
+//                       status.success("Hours Migration successfull");
 //             },
 //             error: function(error) {
 //             status.error("Uh oh, something went wrong.");
@@ -222,6 +158,70 @@ query.limit(1000);
 //     })
 //
 // });
+
+Parse.Cloud.job("Migrate_Documents", function(request, status) {
+
+var docsQuery = Parse.Object.extend("Document");
+var query = new Parse.Query(docsQuery);
+
+query.limit(1000);
+
+    query.find({
+            success:function(results) {
+
+            console.info("total old documents needing to ARCHIVE = "+results.length);
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+
+                       var userobjectid = result.get("userObjectId");
+                      var folder = result.get("folder");
+                      var filename = result.get("fileName");
+
+                      var file = result.get("file");
+
+
+                       var Docs2019 = Parse.Object.extend("Document_2019");
+
+                       var Docs = new Docs2019();
+
+                       Docs.set("userObjectId",userobjectid);
+                       Docs.set("folder",folder);
+                       Docs.set("fileName",filename);
+                       Docs.set("file",file);
+
+
+
+
+                      Docs.save(null, {
+  success: function(Docs) {
+    // Execute any logic that should take place after the object is saved.
+    //console.info('Sale archived with label ='+salelabel);
+    //status.success("SZSales completed")
+    //res.send("success");
+     status.success("Docs Migration successfull");
+
+  },
+  error: function(result, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and description.
+    console.info('Failed to update sale, with error code: ' + error.message);
+
+    //res.send("fail");
+  }
+});
+
+
+                }
+
+                      status.success("Documents Migration successfull");
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");
+            }
+    })
+
+});
 //
 // Parse.Cloud.job("Migrate_Activity", function(request, status) {
 //
