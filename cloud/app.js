@@ -251,25 +251,25 @@ query.limit(500);
 
                        var Act = new Act2019();
 
-                       if (userobjectid) {
+                      // if (userobjectid) {
                             Act.set("userObjectId",userobjectid);
-                       }
-                       if (logdatedate) {
+                      // }
+                       //if (logdatedate) {
                           Act.set("logDateDate",logdatedate);
 
-                       }
-                       if (place) {
+                       //}
+                       //if (place) {
                           Act.set("place",place);
-                       }
+                      // }
 
-                       if (logdate) {
+                       //if (logdate) {
                           Act.set("logDate",logdate);
-                       }
+                       //}
 
 
-                      if (type) {
+                      //if (type) {
                         Act.set("type",type);
-                      }
+                      //}
 
 
 
