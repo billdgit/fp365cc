@@ -237,6 +237,7 @@ query.limit(500);
             console.info("total old activity needing to ARCHIVE = "+results.length);
 
                 for (var i = 0; i < results.length; i++) {
+
                        var result = results[i];
 
                       var userobjectid = result.get("userObjectId");
@@ -280,7 +281,7 @@ query.limit(500);
     //console.info('Activity archived with label');
     //status.success("SZSales completed")
     //res.send("success");
-    //status.success("Score Migration successfull");
+    status.success("Act successfull");
 
   },
   error: function(result, error) {
