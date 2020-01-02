@@ -228,8 +228,8 @@ Parse.Cloud.job("Migrate_Activity", function(request, status) {
 var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
-query.limit(1000);
-query.skip(636);
+query.limit(500);
+//query.skip(506);
 
     query.find({
             success:function(results) {
