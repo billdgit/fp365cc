@@ -25,7 +25,7 @@ var pushquery = new Parse.Query(Parse.Installation);
 
                   //console.info(" appVersion match= "+results[i].get("appVersion"));
               
-              console.info(" device token = "+ dT);
+              console.info(" device token = "+ results[i].get("deviceToken"));
 
               if(!sent.includes(dT)){
                   Parse.Push.send({
@@ -38,7 +38,7 @@ var pushquery = new Parse.Query(Parse.Installation);
           success: function() {
             // Push was successful
             sent.push(dT);
-              console.info(" PUSH SUCCEEDED device token = "+ dT);
+              console.info(" PUSH SUCCEEDED device token = "+ results[i].get("deviceToken"));
 
           },
           error: function(error) {
