@@ -7,7 +7,7 @@ var pushquery = new Parse.Query(Parse.Installation);
   // {useMasterKey:true}
 //query.greaterThanOrEqualTo("wins", 50);
 
- pushquery.greaterThanOrEqualTo("appVersion", "2.");
+ pushquery.greaterThanOrEqualTo("appVersion", "2.4");
 
     pushquery.find({useMasterKey:true,
             success:function(results) {
