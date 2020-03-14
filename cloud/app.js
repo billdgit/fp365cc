@@ -23,7 +23,9 @@ var pushquery = new Parse.Query(Parse.Installation);
 
                 //if (results[i].get("installationId") === '96e53143-900e-4137-8724-c283f4b14d05') {
 
-                  console.info(" appVersion match= "+results[i].get("appVersion"));
+                  //console.info(" appVersion match= "+results[i].get("appVersion"));
+              
+              console.info(" device token = "+ dT);
 
               if(!sent.includes(dT)){
                   Parse.Push.send({
@@ -36,13 +38,14 @@ var pushquery = new Parse.Query(Parse.Installation);
           success: function() {
             // Push was successful
             sent.push(dT);
-              console.info(" PUSH SUCCEEDED ");
+              console.info(" PUSH SUCCEEDED device token = "+ dT);
 
           },
           error: function(error) {
             // Handle error
             //alert("(error"+eval(error));
-              console.info(" PUSH FAILED: "+error);
+                
+              console.info(" PUSH FAILED:device token = "+ dT);
           }
         });
 
