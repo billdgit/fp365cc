@@ -228,12 +228,13 @@ Parse.Cloud.job("Migrate_Activity", function(request, status) {
 var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
-query.limit(1000);
+query.limit(300);
 //query.skip(1000);
     query.find({
             success:function(results) {
 
             console.info("total old activity needing to ARCHIVE = "+results.length);
+                
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
