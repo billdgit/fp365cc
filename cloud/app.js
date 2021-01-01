@@ -375,7 +375,7 @@ query.limit(500);
 
 
 //query.equalTo("movie", request.params.movie);
-query.equalTo("userObjectId", Odj8E7CCbh)
+//query.equalTo("userObjectId", Odj8E7CCbh)
 
 
 //query.descending("logDateDate");
