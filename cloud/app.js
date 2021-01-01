@@ -229,7 +229,7 @@ var actQuery = Parse.Object.extend("Activity");
 var query = new Parse.Query(actQuery);
 
 query.limit(300);
-query.skip(1200);
+//query.skip(1200);
     query.find({
             success:function(results) {
 
@@ -354,6 +354,52 @@ query.limit(300);
                 }
 
                       status.success("AuthFail Migration successfull");
+            },
+            error: function(error) {
+            status.error("Uh oh, something went wrong.");
+            console.info("Failed!");
+            }
+    })
+
+});
+
+Parse.Cloud.job("Delete_AuthFail", function(request, status) {
+
+
+
+var actQuery = Parse.Object.extend("AuthFail");
+var query = new Parse.Query(actQuery);
+
+query.limit(500);
+//query.skip(1000);
+
+
+//query.equalTo("movie", request.params.movie);
+query.equalTo("userObjectId","Odj8E7CCbh")
+
+
+//query.descending("logDateDate");
+
+    query.find({
+            success:function(results) {
+
+            console.info("total old AuthFails needing to ARCHIVE = "+results.length);
+
+                for (var i = 0; i < results.length; i++) {
+                       var result = results[i];
+
+
+                       result.destroy().then((myObject) => {
+  // The object was deleted from the Parse Cloud.
+}, (error) => {
+  // The delete failed.
+  // error is a Parse.Error with an error code and message.
+});
+
+
+                }
+
+                      status.success("AuthFail Delete successfull");
             },
             error: function(error) {
             status.error("Uh oh, something went wrong.");
