@@ -388,13 +388,15 @@ query.equalTo("userObjectId", Odj8E7CCbh)
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
 
+                       var userobjectid = result.get("userObjectId");
 
-                       result.destroy().then((myObject) => {
-  // The object was deleted from the Parse Cloud.
-}, (error) => {
-  // The delete failed.
-  // error is a Parse.Error with an error code and message.
-});
+                       if (userObjectId == "Odj8E7CCbh") {
+
+                         result.destroy();
+
+                       }
+
+
 
 
                 }
