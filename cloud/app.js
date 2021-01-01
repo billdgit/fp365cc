@@ -375,7 +375,7 @@ query.limit(500);
 
 
 //query.equalTo("movie", request.params.movie);
-query.equalTo("userObjectId","Odj8E7CCbh")
+query.equalTo("userObjectId", Odj8E7CCbh)
 
 
 //query.descending("logDateDate");
@@ -383,7 +383,7 @@ query.equalTo("userObjectId","Odj8E7CCbh")
     query.find({
             success:function(results) {
 
-            console.info("total old AuthFails needing to ARCHIVE = "+results.length);
+            console.info("total old AuthFails needing to delete = "+results.length);
 
                 for (var i = 0; i < results.length; i++) {
                        var result = results[i];
