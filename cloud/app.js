@@ -305,7 +305,7 @@ Parse.Cloud.job("Migrate_AuthFail", function(request, status) {
 var actQuery = Parse.Object.extend("AuthFail");
 var query = new Parse.Query(actQuery);
 
-query.limit(1000);
+query.limit(300);
 //query.skip(1000);
 
 
