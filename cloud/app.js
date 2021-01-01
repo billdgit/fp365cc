@@ -335,7 +335,7 @@ query.limit(300);
                       Act.save(null, {
   success: function(Act) {
     // Execute any logic that should take place after the object is saved.
-    console.info('Activity archived with label');
+    //console.info('Activity archived with label');
     //status.success("SZSales completed")
     //res.send("success");
      //status.success("Score Migration successfull");
@@ -344,7 +344,7 @@ query.limit(300);
   error: function(result, error) {
     // Execute any logic that should take place if the save fails.
     // error is a Parse.Error with an error code and description.
-    console.info('Failed to update Activity, with error code: ' + error.message);
+    //console.info('Failed to update Activity, with error code: ' + error.message);
 
     //res.send("fail");
   }
